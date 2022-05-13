@@ -5,6 +5,8 @@ from streamlit_option_menu import option_menu
 #importar paginas
 import pages.prophet as pt
 import pages.relatorio_performance as rp
+import pages.fronteira_eficiente as fe
+
 
 
 
@@ -33,7 +35,7 @@ st.set_page_config(page_title="GoProfit",
 
 #paginas
 st.sidebar.write('---')
-st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>Bem Vindo ao Smart Portfolio !<b></h3>",
+st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>Bem Vindo ao GoProfit !<b></h3>",
                 unsafe_allow_html=True)
 # pages = ['Prophet']
 # pagina = st.sidebar.selectbox("Selecione uma funcionalidade:", pagina)
@@ -41,12 +43,16 @@ st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20p
 #pagina com navegation bar
 pages = option_menu(
     menu_title="GoProfit",
-    options=['Prophet', 'Relatório Performance'],
+    options=['Prophet', 'Relatório Performance', 'Fronteira Eficiente'],
     menu_icon='cast',
     default_index=0,
     orientation='horizontal'
 )
 if pages == 'Prophet':
     pt.prophet()
+
 if pages == 'Relatório Performance':
     rp.relatorio_performance()
+
+if pages == 'Fronteira Eficiente':
+    fe.fronteira_eficiente()
