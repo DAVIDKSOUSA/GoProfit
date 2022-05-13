@@ -8,7 +8,18 @@ from plotly import graph_objs as go
 
 #chamar pagina
 def prophet():
-    # baixar dados e sidebar
+
+    #sidebar
+    # with open("qts/IMG_4341.jpg", "rb") as pdf_file:
+    #     PDFbyte = pdf_file.read()
+
+    # st.download_button(label='Baixar Documento',
+    #                    data=PDFbyte,
+    #                    file_name="IMG_4341.jpg",
+    #                    mime='application/octet-stream')
+
+    #dados app sidebar
+
     #st.subheader('Previsão de Cotações com PROPHET')
     st.sidebar.header('Escolha a Data e o Ativo')
     ticker = st.sidebar.text_input('TICKER - Yahoo Finance', value='USDBRL=X ')
@@ -55,7 +66,7 @@ def prophet():
     # st.write(fig.show())
 
     # tempo de previsão
-    n_dias = st.slider('Quantidade de dias de previsão', 30, 90)
+    n_dias = st.sidebar.slider('Quantidade de dias de previsão', 30, 90)
     df.reset_index(inplace=True)
     # df.Date = pd.Series(pd.to_datetime(df.index, format = '%Y-%m-%d'))
 
@@ -73,7 +84,14 @@ def prophet():
     modelo.fit(df_treino)
     futuro = modelo.make_future_dataframe(periods=n_dias, freq='B')
     previsao = modelo.predict(futuro)
-    st.subheader('Previsão')
+    st.write('___')
+    st.header('Previsões')
+    st.subheader('Legenda:')
+    coluns = st.columns(2)
+    coluns[0].write('ds - Data')
+    coluns[0].write('yhat - Média')
+    coluns[1].write('yhat_upper - Banda Superior')
+    coluns[1].write('yhat_loewr - Banda Inferior')
     #para mostrar o data frame usar o código abaixo
     st.write(previsao[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(n_dias))
 
