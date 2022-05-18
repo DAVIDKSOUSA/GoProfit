@@ -6,13 +6,16 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 import streamlit as st
+#import plotly
 import plotly.graph_objects as go
 #from plotly.subplots import make_subplots
 #import plotly.express as px
 #import plotly.figure_factory as ff
 import yfinance as yf
+#import quantstats as qs
 
 def fronteira_eficiente():
+    # introducao
     st.subheader('FRONTEIRA EFICIENTE')
     st.markdown("<h5 style='text-align: left; color:grey;'>Teoria moderna do portfólio - Harry Markowitz 1952 </h5>",
                 unsafe_allow_html=True)
@@ -38,6 +41,7 @@ def fronteira_eficiente():
 
     ticker = [ticker_1, ticker_2, ticker_3, ticker_4, ticker_5, ticker_6]
     data = yf.download(ticker, start=start, end=end)['Adj Close']
+    #data = yf.download(ticker, start=pd.datetime(2015, 1, 1), end=pd.datetime(2022, 1, 1))['Adj Close']
     daily_returns = data.pct_change()
     daily_returns.head()
     #-- Get annualised mean returns
@@ -82,7 +86,7 @@ def fronteira_eficiente():
     #-- Plot the risk vs. return of randomly generated portfolios
     #-- Convert the list from before into an array for easy plotting
     mean_variance_pairs = np.array(mean_variance_pairs)
-    risk_free_rate=0  #-- Include risk free rate here
+    risk_free_rate=0 #-- Include risk free rate here
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=(mean_variance_pairs[:,1]**0.5*100).round(1), y=(mean_variance_pairs[:,0]*100).round(1),
                           marker=dict(color=(mean_variance_pairs[:,0]-risk_free_rate)/(mean_variance_pairs[:,1]**0.5),
