@@ -15,6 +15,8 @@ lottie_coding = load_lottieurl('https://assets4.lottiefiles.com/packages/lf20_z6
 #sidebar
 # image = Image.open('images/condor guerreiro colorido.png')
 # st.sidebar.image(image)
+st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>GoProfit<b></h3>",
+                    unsafe_allow_html=True)
 
 #chamada da pagina
 def home():
@@ -31,14 +33,14 @@ def home():
     # coluns[1].write('Manter o efetivo preparado para empregar seus meios aéreos com SEGURANÇA, EFICIENCIA e EFICÁCIA.')
     # st.write('---')
 
-    p_title('AVISOS:')
-    st.text('')
-    st.write(' - Reuniãoto e CONREC - 12/05/22 às 13h30.')
+    # p_title('AVISOS:')
+    # st.text('')
+    # st.write(' - Reuniãoto e CONREC - 12/05/22 às 13h30.')
 
     # image = Image.open('qts/IMG_4341.jpg')
     # st.image(image)
 
-    st.write('---')
+    # st.write('---')
 
     #st.text('')
     #st.markdown("<h1 style='text-align: center; color:grey; font-size:23px;'><b>Faça uma análise completa da sua "
@@ -60,11 +62,14 @@ def home():
         left_column, right_column = st.columns(2)
         with left_column:
             def p_title(title):
-                st.markdown(f'<h3 style="text-align: left; color:#F63366; font-size:28px;">{title}</h3>',
+                st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">{title}</h3>',
                             unsafe_allow_html=True)
-            p_title('AVISOS:')
+            p_title('GoProfit')
             st.text('')
-            st.write(' - Reunião/Prestação de Contas de Fiscais de Contrato e CONREC - 12/05/22 às 13h30.')
+            st.write(' - O GoProfit está em desenvolvimento. \n'
+                     ' - As informações contidas neste Webapp não constituem\
+            recomendação de investimento. Qualquer e toda decisão de investimento será de única e exclusiva\
+            responsabilidade do usuário.')
 
             # image = Image.open('qts/IMG_4341.jpg')
             # st.image(image)
@@ -77,19 +82,19 @@ def home():
             #                    file_name="IMG_4341.jpg",
             #                    mime='application/octet-stream')
 
-            p_title('AVISOS:')
-            st.write('##')
+            # p_title('AVISOS:')
+            # st.write('##')
 
             st.write('Mídias Sociais:')
             # link para modificação dos logos
             st.markdown(
                 """
-                :point_right:\t[![YouTube Channel Condor](https://img.shields.io/youtube/channel/subscribers/UCHi_qOCcC_KeMu18cOyHtQg?label=GoProfit&style=social)](https://www.youtube.com/channel/UCHi_qOCcC_KeMu18cOyHtQg)
+                [![YouTube Channel Condor](https://img.shields.io/youtube/channel/subscribers/UCHi_qOCcC_KeMu18cOyHtQg?label=GoProfit&style=social)](https://www.youtube.com/channel/UCHi_qOCcC_KeMu18cOyHtQg)
                 """
             )
             st.markdown(
                 """
-                :point_right:\t[![Instagram](https://img.shields.io/badge/DAVIDKSOUSA-E4405F?logo=instagram&style=social)](https://www.instagram.com/davidksousa/)
+                [![Instagram](https://img.shields.io/badge/DAVIDKSOUSA-E4405F?logo=instagram&style=social)](https://www.instagram.com/davidksousa/)
                 """
             )
         with right_column:

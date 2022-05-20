@@ -44,9 +44,9 @@ pages = option_menu(
 #sidebar
 # image = Image.open('images/condor guerreiro colorido.png')
 # st.sidebar.image(image)
-st.sidebar.write('---')
-st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>Bem Vindo ao GoProfit !<b></h3>",
-                unsafe_allow_html=True)
+# st.sidebar.write('---')
+# st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>GoProfit !<b></h3>",
+#                 unsafe_allow_html=True)
 
 #chamada de pagina
 if pages == "Home":
