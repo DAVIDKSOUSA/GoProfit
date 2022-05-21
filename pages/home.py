@@ -67,10 +67,11 @@ def home():
                             unsafe_allow_html=True)
             p_title('GoProfit')
             st.text('')
-            st.write(' - O GoProfit está em desenvolvimento. \n'
-                     ' - As informações contidas neste Webapp não constituem\
-            recomendação de investimento. Qualquer e toda decisão de investimento será de única e exclusiva\
-            responsabilidade do usuário.')
+            st.write('- As informações contidas neste Webapp não constituem\
+            recomendação de investimento.\n '
+                     '- Qualquer e toda decisão de investimento será de única e exclusiva\
+            responsabilidade do usuário.\n'
+            '- Os algoritmos coletam os dados da API do Yahoo Finance para a análise e previsão das Séries Temporais.')
 
             # image = Image.open('qts/IMG_4341.jpg')
             # st.image(image)

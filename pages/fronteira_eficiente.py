@@ -27,6 +27,9 @@ def fronteira_eficiente():
         'dado simplesmente pela média dos ativos individuais, mas sim pela diversificação da carteira de investimento como um todo.'
     )
 
+    st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+                        unsafe_allow_html=True)
+
     form = st.sidebar.form(key="annotation")
 
 

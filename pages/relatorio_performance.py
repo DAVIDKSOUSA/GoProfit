@@ -8,7 +8,8 @@ def relatorio_performance():
 
 
     qs.extend_pandas()
-
+    st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+                        unsafe_allow_html=True)
     form = st.sidebar.form(key="annotation")
 
     form.write('Código da Ação')
