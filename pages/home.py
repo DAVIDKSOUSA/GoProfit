@@ -15,8 +15,9 @@ lottie_coding = load_lottieurl('https://assets4.lottiefiles.com/packages/lf20_z6
 #sidebar
 # image = Image.open('images/condor guerreiro colorido.png')
 # st.sidebar.image(image)
-st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>GoProfit<b></h3>",
-                    unsafe_allow_html=True)
+#esse comando abaixo causo um erro relacioado com a initial page config
+# st.sidebar.markdown("<h3 style='text-align: center; color:#F63366; font-size:20px;'><b>GoProfit<b></h3>",
+#                     unsafe_allow_html=True)
 
 #chamada da pagina
 def home():
