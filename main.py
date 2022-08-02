@@ -5,8 +5,9 @@ from PIL import Image
 
 #importar paginas
 import pages.prophet as pt
+import pages.prophet_dolar as pt_dolar
 import pages.relatorio_performance as rp
-import pages.fronteira_eficiente as fe
+# import pages.fronteira_eficiente as fe
 import pages.home as hm
 
 #configuracao de pagina
@@ -18,13 +19,13 @@ st.set_page_config(page_title="GoProfit",
                    menu_items={"Get Help": None, "Report a Bug": None, "About": None,})
 
 #ocultar o menu
-hide_menu_style = """
-    <style>
-    #MainMenu {visibility: hidden; }
-    footer {visibility: hidden;}
-    </style>
-    """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
+# hide_menu_style = """
+#     <style>
+#     #MainMenu {visibility: hidden; }
+#     footer {visibility: hidden;}
+#     </style>
+#     """
+# st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
@@ -54,5 +55,8 @@ if pages == 'Prophet':
 if pages == 'Relatório Performance':
     rp.relatorio_performance()
 
-if pages == 'Fronteira Eficiente':
-    fe.fronteira_eficiente()
+if pages == 'Prophet_dolar':
+    pt_dolar.prophet_dolar()
+
+# if pages == 'Fronteira Eficiente':
+#     fe.fronteira_eficiente()
