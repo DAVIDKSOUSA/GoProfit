@@ -21,9 +21,9 @@ lottie_coding = load_lottieurl('https://assets4.lottiefiles.com/packages/lf20_z6
 
 #chamada da pagina
 def home():
-    def p_title(title):
-        st.markdown(f'<h3 style="text-align: left; color:#F63366; font-size:28px;">{title}</h3>',
-                    unsafe_allow_html=True)
+    # def p_title(title):
+    #     st.markdown(f'<h3 style="text-align: left; color:#F63366; font-size:28px;">{title}</h3>',
+    #                 unsafe_allow_html=True)
     # coluns = st.columns(2)
     # image = Image.open('images/bolacha.png')
     # coluns[0].image(image, width=300)
