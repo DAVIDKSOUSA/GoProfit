@@ -31,8 +31,8 @@ st.set_page_config(page_title="GoProfit",
 # https://icons.getbootstrap.com - link com icons
 pages = option_menu(
     menu_title="GoProfit",
-    options=['Home', 'Prophet', 'Relatório Performance', 'Fronteira Eficiente'],
-    icons=['pin', 'graph-up-arrow', 'table', 'grip-horizontal'],
+    options=['Home', 'Prophet', 'Relatório Performance', 'Dólar'],
+    icons=['pin', 'graph-up-arrow', 'table', 'grip-horizontal','table'],
     menu_icon='house',
     default_index=0,
     orientation='horizontal'
@@ -55,7 +55,7 @@ if pages == 'Prophet':
 if pages == 'Relatório Performance':
     rp.relatorio_performance()
 
-if pages == 'Prophet_dolar':
+if pages == 'Dólar':
     pt_dolar.prophet_dolar()
 
 # if pages == 'Fronteira Eficiente':

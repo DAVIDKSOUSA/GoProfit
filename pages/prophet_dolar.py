@@ -135,7 +135,7 @@ def prophet_dolar():
             YOUC-USD	yOUcash USD\n
             NEAR-USD	NEAR Protocol USD\n
         """)
-    start_date = form.date_input('Data de Início', value=pd.datetime(2020, 14, 5))
+    start_date = form.date_input('Data de Início', value=pd.datetime(2020, 5, 14))
     end_date = form.date_input('Data Final')
 
     # mensagem warning
@@ -207,7 +207,7 @@ def prophet_dolar():
     #                                                This controls flexibility to fit holiday effects. Similar to seasonality_prior_scale, it defaults to 10.0 which applies basically no regularization, since we usually have multiple observations of holidays and can do a good job of estimating their effects. This could also be tuned on a range of [0.01, 10] as with seasonality_prior_scale.
     #                                                """)
 
-    changepoint_range = form.slider(label='Changepoint Range', min_value=0.1, max_value=1.0, value=0.8,
+    changepoint_range = form.slider(label='Changepoint Range', min_value=0.1, max_value=1.0, value=0.5,
                                     key='test2',
                                     help="""
                                                       This parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. That is because we very rarely see overfitting here (there’s inherent regularization with the fact that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered). A reasonable range for tuning it would probably be [0.01, 10]; when set to 0.01 you should find that the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, since it is effectively an L2 penalty like in ridge regression.
