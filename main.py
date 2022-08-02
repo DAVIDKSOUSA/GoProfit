@@ -12,11 +12,11 @@ import pages.home as hm
 
 #configuracao de pagina
 #procurar emoji para modificar icone do app page_icon procurara na biblioteca tambem
-st.set_page_config(page_title="GoProfit",
-                   page_icon='🛩',
-                   layout="wide",
-                   initial_sidebar_state="auto",
-                   menu_items={"Get Help": None, "Report a Bug": None, "About": None,})
+# st.set_page_config(page_title="GoProfit",
+#                    page_icon='🛩',
+#                    layout="wide",
+#                    initial_sidebar_state="auto",
+#                    menu_items={"Get Help": None, "Report a Bug": None, "About": None,})
 
 #ocultar o menu
 # hide_menu_style = """
