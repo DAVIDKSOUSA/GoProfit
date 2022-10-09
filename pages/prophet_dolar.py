@@ -17,7 +17,7 @@ def prophet_dolar():
     #                    data=PDFbyte,
     #                    file_name="IMG_4341.jpg",
     #                    mime='application/octet-stream')
-
+    #teste
     # dados app sidebar
 
     # st.subheader('Previsão de Cotações com PROPHET')
