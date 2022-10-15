@@ -5,3 +5,4 @@ quantstats==0.0.56
 streamlit-option-menu==0.3.2
 pip-chill==1.0.1
 streamlit-lottie==0.0.3
+streamlit-authenticator==0.1.4
