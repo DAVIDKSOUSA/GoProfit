@@ -29,13 +29,11 @@ import pages.home as hm
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
-pages = option_menu(
-    menu_title="GoProfit",
-    options=['Home', 'Prophet', 'Relatório Performance', 'Dólar'],
-    icons=['pin', 'graph-up-arrow', 'table', 'grip-horizontal','table'],
-    menu_icon='house',
-    default_index=0,
-    orientation='horizontal'
+pages = option_menu("GoProfit",['Home', 'Prophet', 'Relatório Performance', 'Dólar'],
+                    icons=['pin', 'graph-up-arrow', 'table', 'grip-horizontal','table'],
+                    menu_icon='house',
+                    default_index=0,
+                    orientation='horizontal'
 )
 
 #sidebar
