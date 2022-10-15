@@ -21,9 +21,9 @@ def prophet_dolar():
     # dados app sidebar
 
     # st.subheader('Previsão de Cotações com PROPHET')
-    st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
                         unsafe_allow_html=True)
-    form = st.sidebar.form(key="annotation")
+    form = st.form(key="annotation")
     form.subheader('Escolha a Data e o Ativo')
     ticker = form.text_input('TICKER - Yahoo Finance', value='USDBRL=X', help=
     """
@@ -242,4 +242,3 @@ def prophet_dolar():
         # grafico2
         grafico2 = plot_components_plotly(modelo, previsao)
         st.plotly_chart(grafico2)
-
