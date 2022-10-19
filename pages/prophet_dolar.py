@@ -142,6 +142,7 @@ def prophet_dolar():
     if start_date >= end_date:
         st.error('DATA FINAL DEVE SER MAIOR QUE A DATA INICIAL !')
     df = yf.download(ticker, start=start_date, end=end_date)
+    df.index = df.index.tz_localize(None)
 
     # st.write(df.info)
     # df = wb.get_data_yahoo(ticker, start = start_date, end = end_date, )

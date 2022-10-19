@@ -18,32 +18,41 @@ import pages.home as hm
 #                    initial_sidebar_state="auto",
 #                    menu_items={"Get Help": None, "Report a Bug": None, "About": None,})
 
-st.set_page_config(page_title="Go Profit",
-                   page_icon='🛩',
-                   layout="wide",
-                   initial_sidebar_state="auto",
-                   menu_items={'Get help': None,
-                               "Report a Bug": None,
-                               "About": None,
-                                }
-                   )
+# st.set_page_config(page_title="Go Profit",
+#                    page_icon='🛩',
+#                    layout="wide",
+#                    initial_sidebar_state="auto",
+#                    menu_items={'Get help': None,
+#                                "Report a Bug": None,
+#                                "About": None,
+#                                 }
+#                    )
 #ocultar o menu
-hide_menu_style = """
-    <style>
-    #MainMenu {visibility: hidden; }
-    footer {visibility: hidden;}
-    </style>
-    """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
+# hide_menu_style = """
+#     <style>
+#     #MainMenu {visibility: hidden; }
+#     footer {visibility: hidden;}
+#     </style>
+#     """
+# st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
-pages = option_menu("GoProfit",['Home', 'Prophet', 'Relatório Performance', 'Dólar'],
-                    icons=['pin', 'graph-up-arrow', 'table', 'grip-horizontal','table'],
+pages = option_menu("GoProfit", ['Prophet', 'Dólar'],
+                    icons=['pin', 'graph-up-arrow'],
                     menu_icon='house',
+                    styles={
+                        "container": {"padding": "0!important", "background-color": "#fafafa"},
+                        "icon": {"color": "orange", "font-size": "25px"},
+                        "nav-link": {"font-size": "25px", "text-align": "left", "margin": "0px",
+                                     "--hover-color": "#fafafa"},
+                        "nav-link-selected": {"background-color": "blue"},
+                    },
                     default_index=0,
-                    orientation='horizontal'
+                    orientation='vertical'
 )
+
+# icons = ['pin', 'graph-up-arrow', 'table', 'grip-horizontal', 'table'],
 
 #sidebar
 # image = Image.open('images/condor guerreiro colorido.png')
@@ -53,14 +62,14 @@ pages = option_menu("GoProfit",['Home', 'Prophet', 'Relatório Performance', 'D�
 #                 unsafe_allow_html=True)
 
 #chamada de pagina
-if pages == "Home":
-    hm.home()
+# if pages == "Home":
+#     hm.home()
 
 if pages == 'Prophet':
     pt.prophet()
 
-if pages == 'Relatório Performance':
-    rp.relatorio_performance()
+# if pages == 'Relatório Performance':
+#     rp.relatorio_performance()
 
 if pages == 'Dólar':
     pt_dolar.prophet_dolar()

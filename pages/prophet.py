@@ -9,6 +9,7 @@ from plotly import graph_objs as go
 #chamar pagina
 def prophet():
 
+
     #sidebar
     # with open("qts/IMG_4341.jpg", "rb") as pdf_file:
     #     PDFbyte = pdf_file.read()
@@ -21,9 +22,9 @@ def prophet():
     #dados app sidebar
 
     #st.subheader('Previsão de Cotações com PROPHET')
-    st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
                         unsafe_allow_html=True)
-    form = st.sidebar.form(key="annotation")
+    form = st.form(key="annotation")
     form.subheader('Escolha a Data e o Ativo')
     ticker = form.text_input('TICKER - Yahoo Finance', value='VALE3.SA', help=
                              """
@@ -181,6 +182,8 @@ def prophet():
     form.subheader('Escolha os parâmetros para a análise')
 
     n_dias = form.slider('Quantidade de dias de previsão', 30, 90)
+    df.index = df.index.tz_localize(None)
+
     df.reset_index(inplace=True)
     df_treino = df[['Date', 'Adj Close']]
 
