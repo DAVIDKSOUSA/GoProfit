@@ -183,7 +183,9 @@ def prophet_dolar():
 
     n_dias = form.slider('Quantidade de dias de previsão', 30, 90)
     df.reset_index(inplace=True)
+
     df_treino = df[['Date', 'Close']]
+    df_treino.index = df_treino.index.tz_localize(None)
 
     # renomear colunas
     df_treino = df_treino.rename(columns={'Date': 'ds', 'Close': 'y'})
