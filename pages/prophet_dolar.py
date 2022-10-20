@@ -5,8 +5,7 @@ import yfinance as yf
 from prophet import Prophet
 from prophet.plot import plot_plotly, plot_components_plotly
 from plotly import graph_objs as go
-import time
-
+import pandas as pd
 
 # chamar pagina
 def prophet_dolar():
