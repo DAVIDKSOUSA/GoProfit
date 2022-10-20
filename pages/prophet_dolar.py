@@ -5,6 +5,7 @@ import yfinance as yf
 from prophet import Prophet
 from prophet.plot import plot_plotly, plot_components_plotly
 from plotly import graph_objs as go
+import time
 
 
 # chamar pagina
@@ -185,10 +186,10 @@ def prophet_dolar():
     df.reset_index(inplace=True)
 
     df_treino = df[['Date', 'Close']]
-    df_treino.index = df_treino.index.tz_localize(None)
 
     # renomear colunas
     df_treino = df_treino.rename(columns={'Date': 'ds', 'Close': 'y'})
+
 
     # hyperparameters
     seasonality_mode = form.radio(label='Seasonality Mode', options=['additive', 'multiplicative'], index=0,
