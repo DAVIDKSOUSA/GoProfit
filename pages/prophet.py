@@ -1,16 +1,15 @@
-#importar bibliotecas
+# importar bibliotecas
 import pandas as pd
 import streamlit as st
 import yfinance as yf
 from prophet import Prophet
 from prophet.plot import plot_plotly, plot_components_plotly
-from plotly import graph_objs as go
+#from plotly import graph_objs as go
+import pandas as pd
 
-#chamar pagina
+# chamar pagina
 def prophet():
-
-
-    #sidebar
+    # sidebar
     # with open("qts/IMG_4341.jpg", "rb") as pdf_file:
     #     PDFbyte = pdf_file.read()
 
@@ -18,25 +17,25 @@ def prophet():
     #                    data=PDFbyte,
     #                    file_name="IMG_4341.jpg",
     #                    mime='application/octet-stream')
+    #teste
+    # dados app sidebar
 
-    #dados app sidebar
-
-    #st.subheader('Previsão de Cotações com PROPHET')
+    # st.subheader('Previsão de Cotações com PROPHET')
     st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
                         unsafe_allow_html=True)
     form = st.form(key="annotation")
     form.subheader('Escolha a Data e o Ativo')
-    ticker = form.text_input('TICKER - Yahoo Finance', value='VALE3.SA', help=
-                             """
-                             Para realizar a análise de um ativo deve-se inserir no campo abaixo mesmo código do site Yahoo Finance.
-                             Caso haja dúvidas em relação ao código a ser utilizado [clique aqui](https://finance.yahoo.com/quote/%5EBVSP/components/) 
-                             e digite o nome do ativo financeiro na barra de busca do site [Yahoo Finance](https://finance.yahoo.com/quote/%5EBVSP/components/). Exemplo:\n
-                             
-                             - PETR3 digite **PETR3.SA**\n
-                             - S&P500 digite **SPX**\n
-                             - Crude Oil Jun22 digite **CL=F**\n
-                              
-                              """)
+    ticker = form.text_input('TICKER - Yahoo Finance', value='USDBRL=X', help=
+    """
+    Para realizar a análise de um ativo deve-se inserir no campo abaixo mesmo código do site Yahoo Finance.
+    Caso haja dúvidas em relação ao código a ser utilizado [clique aqui](https://finance.yahoo.com/quote/%5EBVSP/components/) 
+    e digite o nome do ativo financeiro na barra de busca do site [Yahoo Finance](https://finance.yahoo.com/quote/%5EBVSP/components/). Exemplo:\n
+
+    - PETR3 digite **PETR3.SA**\n
+    - S&P500 digite **SPX**\n
+    - Crude Oil Jun22 digite **CL=F**\n
+
+     """)
 
     expander = form.expander('Códigos')
     expander.write("""
@@ -136,73 +135,40 @@ def prophet():
             YOUC-USD	yOUcash USD\n
             NEAR-USD	NEAR Protocol USD\n
         """)
-    start_date = form.date_input('Data de Início', value=pd.datetime(2018, 1, 1))
+    start_date = form.date_input('Data de Início', value=pd.datetime(2020, 5, 14))
     end_date = form.date_input('Data Final')
 
     # mensagem warning
     if start_date >= end_date:
         st.error('DATA FINAL DEVE SER MAIOR QUE A DATA INICIAL !')
     df = yf.download(ticker, start=start_date, end=end_date)
-
-    # st.write(df.info)
-    # df = wb.get_data_yahoo(ticker, start = start_date, end = end_date, )
-    # df.index = pd.to_datetime(df.index, format = '%Y-%m-d')
-    #st.write(df)
-
-    # plotar gráfico
-    trace1 = {
-        'x': df.index,
-        'open': df.Open,
-        'close': df.Close,
-        'high': df.High,
-        'low': df.Low,
-        'type': 'candlestick',
-        'name': ticker,
-        'showlegend': True
-    }
-    data = [trace1]
-    layout = go.Layout()
-
-    # legenda
-    layout = go.Layout({
-        'title': {
-            'text': 'Gráfico de Candlestick - ' + ticker,
-            'font': {
-                'size': 20
-            }
-        }
-    })
-
-    # instanciar objeto Figure e plotar o gráfico
-    fig = go.Figure(data=data, layout=layout)
-    st.plotly_chart(fig)
-    # st.write(fig.show())
+    df.index = df.index.tz_localize(None)
 
     # tempo de previsão
     form.subheader('Escolha os parâmetros para a análise')
 
     n_dias = form.slider('Quantidade de dias de previsão', 30, 90)
-    df.index = df.index.tz_localize(None)
-
     df.reset_index(inplace=True)
-    df_treino = df[['Date', 'Adj Close']]
+
+    df_treino = df[['Date', 'Close']]
 
     # renomear colunas
-    df_treino = df_treino.rename(columns={'Date': 'ds', 'Adj Close': 'y'})
+    df_treino = df_treino.rename(columns={'Date': 'ds', 'Close': 'y'})
 
-    #hyperparameters
+
+    # hyperparameters
     seasonality_mode = form.radio(label='Seasonality Mode', options=['additive', 'multiplicative'], index=0,
                                   help="""
                                              Options are **additive**, **multiplicative**. Default is additive, but many business time series will have multiplicative seasonality. This is best identified just from looking at the time series and seeing if the magnitude of seasonal fluctuations grows with the magnitude of the time series.
                                              """)
     seasonality_prior_scale = form.slider(label='Seasonality Prior Scale', min_value=0.01, max_value=10.0, value=10.0,
-                                                      key='test',
-                                                      help="""
+                                          key='test',
+                                          help="""
                                                       This parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. That is because we very rarely see overfitting here (there’s inherent regularization with the fact that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered). A reasonable range for tuning it would probably be 0.01 - 10; when set to 0.01 you should find that the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, since it is effectively an L2 penalty like in ridge regression.
                                                       """)
     changepoint_prior_scale = form.slider(label='Changepoint Prior Scale', min_value=0.001, max_value=0.5, value=0.05,
-                                                      key='teste1',
-                                                      help="""
+                                          key='teste1',
+                                          help="""
                                                       This is probably the most impactful parameter. It determines the flexibility of the trend, and in particular how much the trend changes at the trend changepoints. As described in this documentation, if it is too small, the trend will be underfit and variance that should have been modeled with trend changes will instead end up being handled with the noise term. If it is too large, the trend will overfit and in the most extreme case you can end up with the trend capturing yearly seasonality. The default of 0.05 works for many time series, but this could be tuned; a range of 0.001 - 0.5 would likely be about right. Parameters like this (regularization penalties; this is effectively a lasso penalty) are often tuned on a log scale.
                                                       """)
     # holidays_prior_scale = form.slider(label='Holidays Prior Scale', min_value=0.01, max_value=10.0, value=10.0,
@@ -210,9 +176,9 @@ def prophet():
     #                                                This controls flexibility to fit holiday effects. Similar to seasonality_prior_scale, it defaults to 10.0 which applies basically no regularization, since we usually have multiple observations of holidays and can do a good job of estimating their effects. This could also be tuned on a range of [0.01, 10] as with seasonality_prior_scale.
     #                                                """)
 
-    changepoint_range = form.slider(label='Changepoint Range', min_value=0.1, max_value=1.0, value=0.8,
-                                                      key='test2',
-                                                      help="""
+    changepoint_range = form.slider(label='Changepoint Range', min_value=0.1, max_value=1.0, value=0.5,
+                                    key='test2',
+                                    help="""
                                                       This parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. That is because we very rarely see overfitting here (there’s inherent regularization with the fact that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered). A reasonable range for tuning it would probably be [0.01, 10]; when set to 0.01 you should find that the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, since it is effectively an L2 penalty like in ridge regression.
                                                       """)
 
@@ -235,6 +201,7 @@ def prophet():
         coluns[0].write('yhat - Média')
         coluns[1].write('yhat_upper - Banda Superior')
         coluns[1].write('yhat_loewr - Banda Inferior')
+
         # para mostrar o data frame usar o código abaixo
         st.write(previsao[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(n_dias))
 
@@ -245,4 +212,3 @@ def prophet():
         # grafico2
         grafico2 = plot_components_plotly(modelo, previsao)
         st.plotly_chart(grafico2)
-
