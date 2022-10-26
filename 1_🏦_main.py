@@ -7,11 +7,11 @@ import pages.prophet as pt
 import pages.relatorio_performance as rp
 
 #configuracao de pagina
-# st.set_page_config(page_title="GoProfit",
-#                    page_icon='🛩',
-#                    layout="wide",
-#                    initial_sidebar_state="collapsed",
-#                    menu_items={"Get Help": None, "Report a Bug": None, "About": None,})
+st.set_page_config(page_title="GoProfit",
+                   page_icon='🛩',
+                   layout="wide",
+                   initial_sidebar_state="collapsed",
+                   menu_items={"Get Help": None, "Report a Bug": None, "About": None,})
 
 # ocultar o menu
 hide_menu_style = """
@@ -24,7 +24,8 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
-pages = option_menu('GoProfit', ['Prophet', 'Relatório Performance'],
+pages = option_menu(menu_title= 'GoProfit',
+                    options=['Prophet', 'Relatório Performance'],
                     icons=['pin', 'graph-up-arrow'],
                     menu_icon='house',
                     default_index=0,
