@@ -24,8 +24,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
-pages = option_menu(menu_title= 'GoProfit',
-                    options=['Prophet', 'Relatório Performance'],
+pages = option_menu('GoProfit', ['Prophet', 'Relatório Performance'],
                     icons=['pin', 'graph-up-arrow'],
                     menu_icon='house',
                     default_index=0,
