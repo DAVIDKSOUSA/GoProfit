@@ -11,8 +11,23 @@ from streamlit_option_menu import option_menu
 #from plotly import graph_objs as go
 import pandas as pd
 
-st.set_page_config(page_title="Prophet", page_icon="📉")
+def hidebar():
+    #configuracao de pagina
+    st.set_page_config(page_title="Prophet",
+                       page_icon="📉",
+                       layout="wide",
+                       initial_sidebar_state="expanded",
+                       menu_items={"Get Help": None, "Report a Bug": None, "About": None})
 
+    # ocultar o menu
+    hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden; }
+        footer {visibility: hidden;}
+        </style>
+        """
+    st.markdown(hide_menu_style, unsafe_allow_html=True)
+hidebar()
 # chamar pagina
 # sidebar
 # with open("qts/IMG_4341.jpg", "rb") as pdf_file:

@@ -4,7 +4,24 @@ import quantstats as qs
 
 import streamlit as st
 from streamlit_option_menu import option_menu
-st.set_page_config(page_title="Relatório de Performance", page_icon="📝")
+
+def hidebar():
+    #configuracao de pagina
+    st.set_page_config(page_title="Relatório de Performance",
+                       page_icon="📝",
+                       layout="wide",
+                       initial_sidebar_state="expanded",
+                       menu_items={"Get Help": None, "Report a Bug": None, "About": None})
+
+    # ocultar o menu
+    hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden; }
+        footer {visibility: hidden;}
+        </style>
+        """
+    st.markdown(hide_menu_style, unsafe_allow_html=True)
+hidebar()
 
 qs.extend_pandas()
 st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
