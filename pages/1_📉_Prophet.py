@@ -18,7 +18,7 @@ def hidebar():
                        layout="wide",
                        initial_sidebar_state="expanded",
                        menu_items={"Get Help": None, "Report a Bug": None, "About": None})
-#.
+#..
     # ocultar o menu
     hide_menu_style = """
         <style>
