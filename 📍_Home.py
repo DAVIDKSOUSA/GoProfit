@@ -1,6 +1,6 @@
 #baixar as bibliotecas
 import streamlit as st
-from streamlit_option_menu import option_menu
+#from streamlit_option_menu import option_menu
 
 #importar paginas
 # import pages.prophet as pt
@@ -22,7 +22,6 @@ def hidebar():
         </style>
         """
     st.markdown(hide_menu_style, unsafe_allow_html=True)
-hidebar()
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
