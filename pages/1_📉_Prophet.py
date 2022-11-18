@@ -39,9 +39,9 @@ hidebar()
 #teste
 # dados app sidebar
 # st.subheader('Previsão de Cotações com PROPHET')
-st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
                     unsafe_allow_html=True)
-form = st.form(key="annotation")
+form = st.sidebar.form(key="annotation")
 form.subheader('Escolha a Data e o Ativo')
 ticker = form.text_input('TICKER - Yahoo Finance', value='USDBRL=X', help=
 """
