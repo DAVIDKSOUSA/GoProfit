@@ -22,6 +22,7 @@ def hidebar():
         </style>
         """
     st.markdown(hide_menu_style, unsafe_allow_html=True)
+hidebar()
 
 #pagina com navegation bar
 # https://icons.getbootstrap.com - link com icons
@@ -31,6 +32,3 @@ def hidebar():
 #                     menu_icon='house',
 #                     default_index=0,
 #                     orientation='horizontal')
-
-
-

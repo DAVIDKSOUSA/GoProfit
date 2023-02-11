@@ -1,7 +1,5 @@
 #importar bibliotecas
-import streamlit as st
 import quantstats as qs
-
 import streamlit as st
 from streamlit_option_menu import option_menu
 
@@ -24,11 +22,11 @@ def hidebar():
 hidebar()
 
 qs.extend_pandas()
-st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">RELATÓRIO DE PERFORMANCE</h3>',
                     unsafe_allow_html=True)
 form = st.sidebar.form(key="annotation")
 form.write('Código da Ação')
-ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='USDBRL=X')
+ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='^BVSP')
 form.write('Benchmark')
 benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='QQQ')
 form.write('Período da Análise')

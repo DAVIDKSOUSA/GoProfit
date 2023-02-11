@@ -1,10 +1,7 @@
 # importar bibliotecas
-import pandas as pd
-import streamlit as st
 import yfinance as yf
-from prophet import Prophet
+from prophet import *
 from prophet.plot import plot_plotly, plot_components_plotly
-
 import streamlit as st
 from streamlit_option_menu import option_menu
 
@@ -39,7 +36,7 @@ hidebar()
 #teste
 # dados app sidebar
 # st.subheader('Previsão de Cotações com PROPHET')
-st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">PROPHET</h3>',
                     unsafe_allow_html=True)
 form = st.sidebar.form(key="annotation")
 form.subheader('Escolha a Data e o Ativo')
@@ -210,7 +207,11 @@ if submit:
     st.write(previsao[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(n_dias))
     # grafico1
     grafico1 = plot_plotly(modelo, previsao)
+    grafico1.update_layout(xaxis=dict(fixedrange=False), yaxis=dict(fixedrange=False),
+                           xaxis_title="Data", yaxis_title="Valor")
     st.plotly_chart(grafico1)
     # grafico2
     grafico2 = plot_components_plotly(modelo, previsao)
+    grafico2.update_layout(xaxis=dict(fixedrange=False), yaxis=dict(fixedrange=False),
+                           xaxis_title="Data", yaxis_title="Valor")
     st.plotly_chart(grafico2)
