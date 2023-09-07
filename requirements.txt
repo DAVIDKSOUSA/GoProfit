@@ -1,5 +1,7 @@
 3==0.0.0
+pip install --upgrade pip
 pip-chill==1.0.1
+numpy==1.21.0 
 plotly==5.8.0
 prophet==1.0.1
 quantstats==0.0.56
