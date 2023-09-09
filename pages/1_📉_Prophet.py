@@ -185,7 +185,7 @@ changepoint_range = form.slider(label='Changepoint Range', min_value=0.1, max_va
                                 help="""
                                                   This parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. That is because we very rarely see overfitting here (there’s inherent regularization with the fact that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered). A reasonable range for tuning it would probably be [0.01, 10]; when set to 0.01 you should find that the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, since it is effectively an L2 penalty like in ridge regression.
                                                   """)
-modelo = Prophet(seasonality_mode=seasonality_mode,
+modelo = prophet(seasonality_mode=seasonality_mode,
                  # holidays_prior_scale=holidays_prior_scale,
                  seasonality_prior_scale=seasonality_prior_scale,
                  changepoint_prior_scale=changepoint_prior_scale,
