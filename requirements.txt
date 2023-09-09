@@ -1,0 +1,5 @@
+datetime==5.2
+pip-chill==1.0.3
+prophet==1.1.4
+quantstats==0.0.62
+streamlit-option-menu==0.3.6
