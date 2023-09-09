@@ -1,6 +1,5 @@
 #baixar as bibliotecas
 import streamlit as st
-#from streamlit_option_menu import option_menu
 
 #importar paginas
 # import pages.prophet as pt
@@ -24,10 +23,11 @@ def hidebar():
     st.markdown(hide_menu_style, unsafe_allow_html=True)
 hidebar()
 
-#pagina com navegation bar
+#pagina com navegation bar - Transformar o app com Navegation BAr
+# from streamlit_option_menu import option_menu
 # https://icons.getbootstrap.com - link com icons
 # pages = option_menu(menu_title= 'GoProfit',
-#                     options=['Prophet', 'Relatório Performance'],
+#                     options=['Prophet', 'Relatório Performance', "iFAt", "S&D"],
 #                     icons=['pin', 'graph-up-arrow'],
 #                     menu_icon='house',
 #                     default_index=0,

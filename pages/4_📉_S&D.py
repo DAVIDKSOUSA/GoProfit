@@ -1,33 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ### Supply and Demand Levels Forecasting Based on Returns Volatility
-# #### Leandro Guerra - Outspoken Market
-# Get the full paper at:
-#  https://www.outspokenmarket.com/diurnalis.html
-#
-
-# In[1]:
-
-
-# Imports
-
+#Bibliotecas
 import pandas as pd
 import numpy as np
 import yfinance as yf
-from plotly.subplots import make_subplots
-import plotly.graph_objects as go
-import streamlit as st
-
-#get_ipython().run_line_magic("matplotlib", "inline")
 import warnings
 warnings.filterwarnings("ignore")
+import streamlit as st
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 
-
-# # Data preparation
-
-# In[2]:
-
+#get_ipython().run_line_magic("matplotlib", "inline")
 
 def hidebar():
     #configuracao de pagina
@@ -288,4 +269,3 @@ if submit:
     )
 
     st.plotly_chart(fig)
-
