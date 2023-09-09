@@ -26,9 +26,9 @@ st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28
                     unsafe_allow_html=True)
 form = st.sidebar.form(key="annotation")
 form.write('Código da Ação')
-ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='^BVSP')
+ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='VALE3.SA')
 form.write('Benchmark')
-benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='QQQ')
+benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='^BVSP')
 form.write('Período da Análise')
 period = form.text_input('Escreva: '
                                '5y, para 5 anos.',
@@ -38,7 +38,7 @@ if submit:
     returns = qs.utils.download_returns(ticker, period=period)
     returns.plot_monthly_heatmap(savefig='output/monthly_heatmap.png')
     st.image('output/monthly_heatmap.png')
-    returns.plot_daily_returns(savefig='output/daily_returns.png')
+    returns.plot_daily_returns(savefig='output/daily_returns.png', benchmark=benchmark)
     st.image('output/daily_returns.png')
     returns.plot_drawdowns_periods(savefig='output/drawdowns_periods.png')
     st.image('output/drawdowns_periods.png')
