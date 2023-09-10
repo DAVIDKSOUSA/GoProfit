@@ -147,7 +147,7 @@ expander.write("""
         YOUC-USD	yOUcash USD\n
         NEAR-USD	NEAR Protocol USD\n
     """)
-start_date = form.date_input('Data de Início', value=pd.datetime(2020, 5, 14))
+start_date = form.date_input('Data de Início', value=pd.datetime("2020, 5, 14"))
 end_date = form.date_input('Data Final')
 # mensagem warning
 if start_date >= end_date:
