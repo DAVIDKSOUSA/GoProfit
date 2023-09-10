@@ -42,7 +42,7 @@ st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28
 form = st.sidebar.form(key="annotation")
 form.write('Código da Ação')
 ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='USDBRL=X')
-start_date = form.date_input('Data de Início', value=pd.datetime(2020, 5, 14))
+start_date = form.date_input('Data de Início', value=pd.to_datetime('2020-05-14'))
 end_date = form.date_input('Data Final')
 #form.write('Benchmark')
 #benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='QQQ')
