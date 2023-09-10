@@ -169,13 +169,23 @@ if submit:
                         shared_xaxes=True,
                         vertical_spacing=0.08)
 
-    fig.add_trace(go.Candlestick(x=df1[str(int(year) + 1)].index
-                                 , open=df1[str(int(year) + 1)]["Open"], high=df1[str(int(year) + 1)]["High"]
-                                 , low=df1[str(int(year) + 1)]["Low"], close=df1[str(int(year) + 1)]["Close"]
-                                 , name="Candle"
-                                 , increasing_line_color="green", decreasing_line_color="red")
-                  , row=1, col=1
-                  )
+    # fig.add_trace(go.Candlestick(x=df1[str(int(year) + 1)].index
+    #                              , open=df1[str(int(year) + 1)]["Open"], high=df1[str(int(year) + 1)]["High"]
+    #                              , low=df1[str(int(year) + 1)]["Low"], close=df1[str(int(year) + 1)]["Close"]
+    #                              , name="Candle"
+    #                              , increasing_line_color="green", decreasing_line_color="red")
+    #               , row=1, col=1
+    #               )
+    
+    next_year = str(int(year) + 1)
+    fig.add_trace(go.Candlestick(x=df1[next_year].index
+                             , open=df1[next_year]["Open"], high=df1[next_year]["High"]
+                             , low=df1[next_year]["Low"], close=df1[next_year]["Close"]
+                             , name="Candle"
+                             , increasing_line_color="green", decreasing_line_color="red")
+              , row=1, col=1
+              )
+
 
     fig.add_hline(y=Upper_Band_12m1d, line_width=1, line_dash="dash", line_color="green")
     fig.add_hline(y=Lower_Band_12m1d, line_width=1, line_dash="dash", line_color="red")
