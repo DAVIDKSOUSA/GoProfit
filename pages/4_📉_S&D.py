@@ -120,18 +120,30 @@ if submit:
     year = "2021"
     
     
+    # Upper_Band_12m1d = df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1] + df1.loc[year]["Adj Close"].iloc[-1]
+
+
     
+    Upper_Band_12m1d = df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1] + df1.loc[year]["Adj Close"].iloc[-1]
+    Lower_Band_12m1d = df1.loc[year]["Adj Close"].iloc[-1] - df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1]
+
+    Upper_Band_12m2d = 2 * df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1] + df1.loc[year]["Adj Close"].iloc[-1]
+    Lower_Band_12m2d = df1.loc[year]["Adj Close"].iloc[-1] - 2 * df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1]
+
+    Upper_Band_12m3d = 3 * df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1] + df1.loc[year]["Adj Close"].iloc[-1]
+
+    Lower_Band_12m4d = df1.loc[year]["Adj Close"].iloc[-1] - 4 * df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1]
 
 
-    Upper_Band_12m1d = df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
-    Lower_Band_12m1d = df1[year]["Adj Close"][-1] - df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
+    # Upper_Band_12m1d = df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
+    # Lower_Band_12m1d = df1[year]["Adj Close"][-1] - df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
 
-    Upper_Band_12m2d = 2 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
-    Lower_Band_12m2d = df1[year]["Adj Close"][-1] - 2 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
+    # Upper_Band_12m2d = 2 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
+    # Lower_Band_12m2d = df1[year]["Adj Close"][-1] - 2 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
 
-    Upper_Band_12m3d = 3 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
+    # Upper_Band_12m3d = 3 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
 
-    Lower_Band_12m4d = df1[year]["Adj Close"][-1] - 4 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
+    # Lower_Band_12m4d = df1[year]["Adj Close"][-1] - 4 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
 
     # Annual S&D Volatility Zones chart
 
