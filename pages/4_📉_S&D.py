@@ -114,7 +114,7 @@ if submit:
     df1.set_index(pd.to_datetime(df1.index), inplace=True)
 
     # Agora você pode acessar os dados de 2021
-    year = "2021"
+    year = "2022"
 
     Upper_Band_12m1d = df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1] + df1.loc[year]["Adj Close"].iloc[-1]
     Lower_Band_12m1d = df1.loc[year]["Adj Close"].iloc[-1] - df1.loc[year]["Vol"].iloc[-1] * df1.loc[year]["Adj Close"].iloc[-1]
