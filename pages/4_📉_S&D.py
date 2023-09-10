@@ -108,6 +108,10 @@ if submit:
     #  - But it's a close enough approximation.
 
     # In[5]:
+    
+    
+    # Certifique-se de que as datas sejam o índice do DataFrame
+    df1.set_index(pd.to_datetime(df1.index), inplace=True)
 
     year = "2021"
 
