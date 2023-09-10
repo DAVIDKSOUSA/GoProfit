@@ -38,7 +38,7 @@ if submit:
     returns = qs.utils.download_returns(ticker, period=period)
     returns.plot_monthly_heatmap(savefig='output/monthly_heatmap.png')
     st.image('output/monthly_heatmap.png')
-    returns.plot_daily_returns(savefig='output/daily_returns.png')
+    returns.plot_daily_returns(savefig='output/daily_returns.png', benchmark=benchmark)
     st.image('output/daily_returns.png')
     returns.plot_drawdowns_periods(savefig='output/drawdowns_periods.png')
     st.image('output/drawdowns_periods.png')
