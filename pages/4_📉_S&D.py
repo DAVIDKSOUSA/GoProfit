@@ -160,9 +160,9 @@ if submit:
     #                             ,  hoverlabel=dict(font=dict(color='white'))))
     
     
-    fig.add_trace(go.Candlestick(x = df1[str(int(year)+1)].index
-                             , open = df1[str(int(year)+1)]["Open"], high = df1[str(int(year)+1)]["High"]
-                             , low = df1[str(int(year)+1)]["Low"], close = df1[str(int(year)+1)]["Close"]
+    fig.add_trace(go.Candlestick(x = df1[str(int(year))].index
+                             , open = df1[str(int(year))]["Open"], high = df1[str(int(year))]["High"]
+                             , low = df1[str(int(year))]["Low"], close = df1[str(int(year))]["Close"]
                              , decreasing=dict(line=dict(color='black', width=1), fillcolor='red')
                              , increasing=dict(line=dict(color='black', width=1), fillcolor='green'))
              )
