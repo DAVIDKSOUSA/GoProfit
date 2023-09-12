@@ -127,21 +127,29 @@ if submit:
     
     df1["year"] = df1.index.year 
 
-    year = "2021"
+    
+    year = "2019"
+
+
+    df1 = df1[df1['year'] == int(year) +1]
+
+
+
+   
    
     
 
 
 
-    Upper_Band_12m1d = df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
-    Lower_Band_12m1d = df1[year]["Adj Close"][-1] - df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
+    Upper_Band_12m1d = df1["Vol"][-1] * df1["Adj Close"][-1] + df1["Adj Close"][-1]
+    Lower_Band_12m1d = df1["Adj Close"][-1] - df1["Vol"][-1] * df1["Adj Close"][-1]
 
-    Upper_Band_12m2d = 2 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
-    Lower_Band_12m2d = df1[year]["Adj Close"][-1] - 2 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
+    Upper_Band_12m2d = 2 * df1["Vol"][-1] * df1["Adj Close"][-1] + df1["Adj Close"][-1]
+    Lower_Band_12m2d = df1["Adj Close"][-1] - 2 * df1["Vol"][-1] * df1["Adj Close"][-1]
 
-    Upper_Band_12m3d = 3 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
+    Upper_Band_12m3d = 3 * df1["Vol"][-1] * df1[["Adj Close"][-1] + df1["Adj Close"][-1]
 
-    Lower_Band_12m4d = df1[year]["Adj Close"][-1] - 4 * df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1]
+    Lower_Band_12m4d = df1["Adj Close"][-1] - 4 * df1["Vol"][-1] * df1["Adj Close"][-1]
 
     # Annual S&D Volatility Zones chart
 
