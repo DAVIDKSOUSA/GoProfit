@@ -72,7 +72,7 @@ if submit:
     # Restante do código permanece igual
 
 
-    fig = make_subplots(rows=1, cols=1,
+        fig = make_subplots(rows=1, cols=1,
                         shared_xaxes=True,
                         vertical_spacing=0.08)
 
