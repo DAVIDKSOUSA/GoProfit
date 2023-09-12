@@ -123,11 +123,14 @@ if submit:
 
     # In[5]:
 
-    year = "2022"
 
-    mask = (df1.index.year == int(year))
     
-    df1 = df1[mask]
+    df1["year"] = df1.index.year 
+
+    year = "2021"
+   
+    
+
 
 
     Upper_Band_12m1d = df1[year]["Vol"][-1] * df1[year]["Adj Close"][-1] + df1[year]["Adj Close"][-1]
