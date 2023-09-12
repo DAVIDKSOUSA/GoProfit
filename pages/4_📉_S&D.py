@@ -149,7 +149,7 @@ if submit:
 
     Upper_Band_12m3d = 3 * df1["Vol"][-1] * df1[["Adj Close"][-1] + df1["Adj Close"][-1]
 
-    Lower_Band_12m4d = df1["Adj Close"][-1] - 4 * df1["Vol"][-1] * df1["Adj Close"][-1]
+    # Lower_Band_12m4d = df1["Adj Close"][-1] - 4 * df1["Vol"][-1] * df1["Adj Close"][-1]
 
     # Annual S&D Volatility Zones chart
 
