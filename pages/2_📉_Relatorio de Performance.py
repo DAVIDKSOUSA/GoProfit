@@ -2,6 +2,8 @@
 import quantstats as qs
 import streamlit as st
 from streamlit_option_menu import option_menu
+import datetime
+import pandas as pd
 
 def hidebar():
     #configuracao de pagina
@@ -35,11 +37,18 @@ period = form.text_input('Escreva: '
                                value='10y')
 submit = form.form_submit_button("Gerar Dados")
 if submit:
-    benchmark_prices = qs.utils.download_returns(benchmark, period=period)
-    benchmark_prices = benchmark_prices.tz_convert('America/Sao_Paulo')
-    returns = qs.utils.download_returns(ticker, period=period)
-    returns = returns.tz_localize(None)
-    returns = returns.tz_localize('America/Sao_Paulo')
+    benchmark_prices = qs.download_returns(benchmark, period=period)
+    benchmark_prices.index = benchmark_prices.index.date
+    benchmark_prices.index = pd.to_datetime(benchmark_prices.index)
+    benchmark_prices.index = pd.to_datetime(benchmark_prices.index).values.astype('datetime64')
+    returns = qs.download_returns(ticker, period=period)
+    returns.index = returns.index.date
+    returns.index = pd.to_datetime(returns.index)
+    returns.index = pd.to_datetime(returns.index).values.astype('datetime64')
+    # # benchmark_prices = benchmark_prices.tz_localize(None)
+    # benchmark_prices = benchmark_prices.tz_convert('America/Sao_Paulo')
+    # # returns = returns.tz_localize(None)
+    # returns = returns.tz_convert('America/Sao_Paulo')
     returns.plot_monthly_heatmap(savefig='output/monthly_heatmap.png')
     st.image('output/monthly_heatmap.png')
     returns.plot_daily_returns(savefig='output/daily_returns.png')
