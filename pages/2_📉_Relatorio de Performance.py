@@ -37,14 +37,10 @@ period = form.text_input('Escreva: '
                                value='10y')
 submit = form.form_submit_button("Gerar Dados")
 if submit:
-    benchmark_prices = qs.download_returns(benchmark, period=period)
-    benchmark_prices.index = benchmark_prices.index.date
-    benchmark_prices.index = pd.to_datetime(benchmark_prices.index)
-    benchmark_prices.index = pd.to_datetime(benchmark_prices.index).values.astype('datetime64')
-    returns = qs.download_returns(ticker, period=period)
-    returns.index = returns.index.date
-    returns.index = pd.to_datetime(returns.index)
-    returns.index = pd.to_datetime(returns.index).values.astype('datetime64')
+    benchmark_prices = qs.utils.download_returns(benchmark, period=period)
+    returns = qs.utils.download_returns(ticker, period=period)
+    benchmark_prices = benchmark_prices.tz_convert('UTC')
+    returns = returns.tz_convert('UTC')
     # # benchmark_prices = benchmark_prices.tz_localize(None)
     # benchmark_prices = benchmark_prices.tz_convert('America/Sao_Paulo')
     # # returns = returns.tz_localize(None)
