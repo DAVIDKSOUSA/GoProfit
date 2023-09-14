@@ -53,7 +53,7 @@ if submit:
     returns.plot_snapshot(savefig='output/snapshot.png')
     st.image('output/snapshot.png')
     
-    returns.plot_daily_returns(savefig='output/daily_returns.png')
+    returns.plot_daily_returns(savefig='output/daily_returns.png', benchmark=benchmark)
     st.image('output/daily_returns.png')
     returns.plot_drawdowns_periods(savefig='output/drawdowns_periods.png')
     st.image('output/drawdowns_periods.png')
