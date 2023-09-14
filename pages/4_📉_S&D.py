@@ -33,7 +33,7 @@ st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28
 
 form = st.sidebar.form(key="annotation")
 form.write('Código da Ação')
-ticker1 = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='USDBRL=X')
+ticker1 = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='VALE3.SA')
 start_date = form.date_input('Data de Início', value=pd.to_datetime('2020-05-14'))
 end_date = form.date_input('Data Final')
 #form.write('Benchmark')
@@ -130,7 +130,7 @@ if submit:
     df1["year"] = df1.index.year 
 
     
-    year = "2019"
+    year = "2022"
 
 
     df1 = df1[df1['year'] == int(year) +1]

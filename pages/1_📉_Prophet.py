@@ -4,12 +4,11 @@ from prophet import *
 from prophet.plot import plot_plotly, plot_components_plotly
 import streamlit as st
 from streamlit_option_menu import option_menu
-
 from plotly import graph_objs as go
 import pandas as pd
 
 def hidebar():
-    #configuracao de pagina
+#configuracao de pagina
     st.set_page_config(page_title="Prophet",
                        page_icon="📉",
                        layout="wide",
@@ -25,32 +24,26 @@ def hidebar():
         """
     st.markdown(hide_menu_style, unsafe_allow_html=True)
 hidebar()
-# chamar pagina
-# sidebar
-# with open("qts/IMG_4341.jpg", "rb") as pdf_file:
-#     PDFbyte = pdf_file.read()
-# st.download_button(label='Baixar Documento',
-#                    data=PDFbyte,
-#                    file_name="IMG_4341.jpg",
-#                    mime='application/octet-stream')
-#teste
-# dados app sidebar
-# st.subheader('Previsão de Cotações com PROPHET')
+
+#chamar pagina
 st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">PROPHET</h3>',
                     unsafe_allow_html=True)
 form = st.sidebar.form(key="annotation")
 form.subheader('Escolha a Data e o Ativo')
-ticker = form.text_input('TICKER - Yahoo Finance', value='USDBRL=X', help=
-"""
-Para realizar a análise de um ativo deve-se inserir no campo abaixo mesmo código do site Yahoo Finance.
-Caso haja dúvidas em relação ao código a ser utilizado [clique aqui](https://finance.yahoo.com/quote/%5EBVSP/components/) 
-e digite o nome do ativo financeiro na barra de busca do site [Yahoo Finance](https://finance.yahoo.com/quote/%5EBVSP/components/). Exemplo:\n
-- PETR3 digite **PETR3.SA**\n
-- S&P500 digite **SPX**\n
-- Crude Oil Jun22 digite **CL=F**\n
- """)
+ticker = form.text_input('TICKER - Yahoo Finance', value='VALE3.SA', 
+                         help="""
+                                    Para realizar a análise de um ativo deve-se inserir no campo abaixo mesmo código do site Yahoo Finance.
+                                    Caso haja dúvidas em relação ao código a ser utilizado [clique aqui](https://finance.yahoo.com/quote/%5EBVSP/components/) 
+                                    e digite o nome do ativo financeiro na barra de busca do site [Yahoo Finance](https://finance.yahoo.com/quote/%5EBVSP/components/). Exemplo:\n
+                                    - PETR3 digite **PETR3.SA**\n
+                                    - S&P500 digite **SPX**\n
+                                    - Crude Oil Jun22 digite **CL=F**\n
+                                    - Bitcoin digite **BTC-USD**\n
+                                    """)
+
 expander = form.expander('Códigos')
 expander.write("""
+               
                 **Futures**\n
         ES=F	E-Mini S&P 500 Jun 22\n
         YM=F	Mini Dow Jones Indus.-$5 Jun 22\n
@@ -104,7 +97,7 @@ expander.write("""
         ^STOXX50E	ESTX 50 PR.EUR\n
         ^N100	Euronext 100 Index\n
         ^BFX	BEL 20\n
-         ^N225	Nikkei 225\n
+        ^N225	Nikkei 225\n
         ^HSI	HANG SENG INDEX\n
         ^STI	STI Index\n
         ^AXJO	S&P/ASX 200\n
@@ -119,99 +112,108 @@ expander.write("""
         ^MXX	IPC MEXICO\n
         ^IPSA	S&P/CLX IPSA\n
         ^MERV	MERVAL\n
-        **Cryptocurrencies**\n
-        Symbol	Name\n
-        BTC-USD	Bitcoin USD\n
-        ETH-USD	Ethereum USD\n
-        USDT-USD	Tether USD\n
-        USDC-USD	USD Coin USD\n
-        BNB-USD	Binance Coin USD\n
-        XRP-USD	XRP USD\n
-        HEX-USD	HEX USD\n
-        BUSD-USD	Binance USD USD\n
-        ADA-USD	Cardano USD\n
-        SOL-USD	Solana USD\n
-        DOGE-USD	Dogecoin USD\n
-        DOT-USD	Polkadot USD\n
-        WBTC-USD	Wrapped Bitcoin USD\n
-        AVAX-USD	Avalanche USD\n
-        WTRX-USD	Wrapped TRON USD\n
-        TRX-USD	TRON USD\n
-        STETH-USD	Lido stETH USD\n
-        DAI-USD	Dai USD\n
-        SHIB-USD	SHIBA INU USD\n
-        MATIC-USD	Polygon USD\n
-        LTC-USD	Litecoin USD\n
-        CRO-USD	Crypto.com Coin USD\n
-        LEO-USD	UNUS SED LEO USD\n
-        YOUC-USD	yOUcash USD\n
-        NEAR-USD	NEAR Protocol USD\n
+        
     """)
 start_date = form.date_input('Data de Início', value=pd.to_datetime('2020-05-14'))
 end_date = form.date_input('Data Final')
-# mensagem warning
+
+#mensagem de aviso
 if start_date >= end_date:
     st.error('DATA FINAL DEVE SER MAIOR QUE A DATA INICIAL !')
 df = yf.download(ticker, start=start_date, end=end_date)
 df.index = df.index.tz_localize(None)
-# tempo de previsão
+
+#tempo de previsão
 form.subheader('Escolha os parâmetros para a análise')
-n_dias = form.slider('Quantidade de dias de previsão', 30, 90)
+n_dias = form.slider('Quantidade de Dias', 30, 120, value=45, help='Escolha a quantidade de dias para a previsão.')
 df.reset_index(inplace=True)
 df_treino = df[['Date', 'Close']]
+
 # renomear colunas
 df_treino = df_treino.rename(columns={'Date': 'ds', 'Close': 'y'})
-# hyperparameters
-seasonality_mode = form.radio(label='Seasonality Mode', options=['additive', 'multiplicative'], index=0,
-                              help="""
-                                         Options are **additive**, **multiplicative**. Default is additive, but many business time series will have multiplicative seasonality. This is best identified just from looking at the time series and seeing if the magnitude of seasonal fluctuations grows with the magnitude of the time series.
-                                         """)
-seasonality_prior_scale = form.slider(label='Seasonality Prior Scale', min_value=0.01, max_value=10.0, value=10.0,
-                                      key='test',
+
+#parâmetros
+#seasonality_mode = form.radio(label='Seasonality Mode', options=['additive', 'multiplicative'], index=0,
+#                               help="""
+#                                     "As opções são **aditivas** e **multiplicativas**. O padrão é aditivo, mas muitas séries \n
+#                                     temporais de negócios terão sazonalidade multiplicativa. Isso é melhor identificado apenas \n
+#                                     ao olhar para a série temporal e verificar se a magnitude das flutuações sazonais cresce com a \n
+#                                     magnitude da série temporal."                                         """)
+
+
+#seasonality_prior_scale = form.slider(label='Seasonality Prior Scale', min_value=0.01, max_value=10.0, value=10.0,
+#                                       key='test',
+#                                       help="""
+#                                                   This parameter controls the flexibility of the seasonality. Similarly, a large value allows\n
+#                                                   the seasonality to fit large fluctuations, a small value shrinks the magnitude of the \n
+#                                                   seasonality. The default is 10., which applies basically \nno regularization. That is \n
+#                                                   because we very rarely see overfitting here (there’s inherent regularization with the fact \n
+#                                                   that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered).\n
+#                                                   A reasonable range for tuning it would probably be 0.01 - 10; when set to 0.01 you should find that \n
+#                                                   the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, \n
+#                                                   since it is effectively an L2 penalty like in ridge regression.
+#                                                   """)
+changepoint_prior_scale = form.slider(label='Flexibilidade na Tendência do Ativo', min_value=0.001, max_value=0.5, value=0.05, key='teste1',
                                       help="""
-                                                  This parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. That is because we very rarely see overfitting here (there’s inherent regularization with the fact that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered). A reasonable range for tuning it would probably be 0.01 - 10; when set to 0.01 you should find that the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, since it is effectively an L2 penalty like in ridge regression.
-                                                  """)
-changepoint_prior_scale = form.slider(label='Changepoint Prior Scale', min_value=0.001, max_value=0.5, value=0.05,
-                                      key='teste1',
-                                      help="""
-                                                  This is probably the most impactful parameter. It determines the flexibility of the trend, and in particular how much the trend changes at the trend changepoints. As described in this documentation, if it is too small, the trend will be underfit and variance that should have been modeled with trend changes will instead end up being handled with the noise term. If it is too large, the trend will overfit and in the most extreme case you can end up with the trend capturing yearly seasonality. The default of 0.05 works for many time series, but this could be tuned; a range of 0.001 - 0.5 would likely be about right. Parameters like this (regularization penalties; this is effectively a lasso penalty) are often tuned on a log scale.
-                                                  """)
+                                                Este é provavelmente o parâmetro mais importante. Ele define o quão flexível a linha\n
+                                                de tendência do gráfico será. Se o valor for muito baixo, a linha de tendência não se \n
+                                                ajustará bem aos dados e poderá parecer muito simples. Se o valor for muito alto, \n
+                                                a linha de tendência pode se ajustar demais aos dados, chegando ao ponto de seguir até mesmo \n
+                                                as menores variações, o que não é ideal.
+                                                
+                                                """)
+
 # holidays_prior_scale = form.slider(label='Holidays Prior Scale', min_value=0.01, max_value=10.0, value=10.0,
 #                                                help="""
-#                                                This controls flexibility to fit holiday effects. Similar to seasonality_prior_scale, it defaults to 10.0 which applies basically no regularization, since we usually have multiple observations of holidays and can do a good job of estimating their effects. This could also be tuned on a range of [0.01, 10] as with seasonality_prior_scale.
+#                                                This controls flexibility to fit holiday effects. Similar to seasonality_prior_scale, it \n
+#                                                defaults to 10.0 which applies basically no regularization, since we usually have multiple \n
+#                                                observations of holidays and can do a good job of estimating their effects. This could also be \n
+#                                                tuned on a range of [0.01, 10] as with seasonality_prior_scale.
 #                                                """)
-changepoint_range = form.slider(label='Changepoint Range', min_value=0.1, max_value=1.0, value=0.5,
-                                key='test2',
+
+changepoint_range = form.slider(label='Intervalo de Pontos de Mudança', min_value=0.1, max_value=1.0, value= 0.2, key='test2',
                                 help="""
-                                                  This parameter controls the flexibility of the seasonality. Similarly, a large value allows the seasonality to fit large fluctuations, a small value shrinks the magnitude of the seasonality. The default is 10., which applies basically no regularization. That is because we very rarely see overfitting here (there’s inherent regularization with the fact that it is being modeled with a truncated Fourier series, so it’s essentially low-pass filtered). A reasonable range for tuning it would probably be [0.01, 10]; when set to 0.01 you should find that the magnitude of seasonality is forced to be very small. This likely also makes sense on a log scale, since it is effectively an L2 penalty like in ridge regression.
-                                                  """)
-modelo = Prophet(seasonality_mode=seasonality_mode,
+                                            Esse ajuste define o quanto as variações sazonais podem ser flexíveis no modelo. Se você usar um valor grande, \n
+                                            o modelo vai se ajustar mais intensamente às grandes mudanças. Se usar um valor pequeno, o modelo \n
+                                            vai atenuar essas variações sazonais. O ajuste padrão é 10, que, na prática, não limita muito a \n
+                                            flexibilidade.  
+                                            
+                                            """)
+modelo = Prophet(#seasonality_mode=seasonality_mode,
                  # holidays_prior_scale=holidays_prior_scale,
-                 seasonality_prior_scale=seasonality_prior_scale,
+                 #seasonality_prior_scale=seasonality_prior_scale,
                  changepoint_prior_scale=changepoint_prior_scale,
                  changepoint_range=changepoint_range)
 submit = form.form_submit_button("Gerar Dados")
+
 if submit:
     modelo.fit(df_treino)
     futuro = modelo.make_future_dataframe(periods=n_dias, freq='B')
     previsao = modelo.predict(futuro)
-    st.write('___')
-    st.header('Previsões')
-    st.subheader('Legenda:')
-    coluns = st.columns(2)
-    coluns[0].write('ds - Data')
-    coluns[0].write('yhat - Média')
-    coluns[1].write('yhat_upper - Banda Superior')
-    coluns[1].write('yhat_loewr - Banda Inferior')
-    # para mostrar o data frame usar o código abaixo
-    st.write(previsao[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(n_dias))
+   
+    #para mostrar o data frame usar o código abaixo
+    
     # grafico1
+    st.header('Gráfico com Previsões')
     grafico1 = plot_plotly(modelo, previsao)
     grafico1.update_layout(xaxis=dict(fixedrange=False), yaxis=dict(fixedrange=False),
                            xaxis_title="Data", yaxis_title="Valor")
     st.plotly_chart(grafico1)
+    
+    st.header('Tabela com os Valores das Previsões')
+    st.subheader('Legenda:')
+    coluns = st.columns(2)
+    coluns[0].write('ds - **Data**')
+    coluns[0].write('yhat - **Média**')
+    coluns[1].write('yhat_upper - **Banda Superior**')
+    coluns[1].write('yhat_loewr - **Banda Inferior**')
+    st.write(previsao[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(n_dias))
+    
     # grafico2
+    #verificar as funcoes de componentes na biblioteca prophet
+    st.write('___')
+    st.header('Componentes do Modelo')
     grafico2 = plot_components_plotly(modelo, previsao)
     grafico2.update_layout(xaxis=dict(fixedrange=False), yaxis=dict(fixedrange=False),
-                           xaxis_title="Data", yaxis_title="Valor")
+                           xaxis_title="", yaxis_title="")
     st.plotly_chart(grafico2)
