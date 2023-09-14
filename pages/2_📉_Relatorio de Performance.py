@@ -23,37 +23,39 @@ def hidebar():
     st.markdown(hide_menu_style, unsafe_allow_html=True)
 hidebar()
 
+
+
 qs.extend_pandas()
-st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">RELATÓRIO DE PERFORMANCE</h3>',
+st.sidebar.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
                     unsafe_allow_html=True)
 form = st.sidebar.form(key="annotation")
 form.write('Código da Ação')
-ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='VALE3.SA')
+ticker = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='USDBRL=X')
 form.write('Benchmark')
-benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='^BVSP')
+benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='QQQ')
 form.write('Período da Análise')
 period = form.text_input('Escreva: '
                                '5y, para 5 anos.',
-                               value='10y')
+                               value='10y'
+                               )
 submit = form.form_submit_button("Gerar Dados")
 if submit:
-    benchmark_prices = qs.utils.download_returns(benchmark, period=period)
     returns = qs.utils.download_returns(ticker, period=period)
-    benchmark_prices = benchmark_prices.tz_convert('UTC')
-    returns = returns.tz_convert('UTC')
-    # # benchmark_prices = benchmark_prices.tz_localize(None)
-    # benchmark_prices = benchmark_prices.tz_convert('America/Sao_Paulo')
-    # # returns = returns.tz_localize(None)
-    # returns = returns.tz_convert('America/Sao_Paulo')
+    # tentativa de plotagem dos gráficos
+    # fig, ax = plt.subplots()
+    # sns.heatmap(returns.monthly_returns(), linewidths=1.9, center=0, square=True, annot=True,  vmax=.3, cmap='RdYlGn', fmt='.1f')
+    # st.pyplot(fig)
+    # gerar as imagens
     returns.plot_monthly_heatmap(savefig='output/monthly_heatmap.png')
     st.image('output/monthly_heatmap.png')
     returns.plot_daily_returns(savefig='output/daily_returns.png')
     st.image('output/daily_returns.png')
     returns.plot_drawdowns_periods(savefig='output/drawdowns_periods.png')
     st.image('output/drawdowns_periods.png')
+    # colocar quantia em dinheiro
     returns.plot_earnings(savefig='output/earnings.png')
     st.image('output/earnings.png')
-    returns.plot_rolling_volatility(savefig='output/rolling_volatility.png', benchmark=benchmark)
+    returns.plot_rolling_volatility(savefig='output/rolling_volatility.png')
     st.image('output/rolling_volatility.png')
     # colocar escolher benchmark
     returns.plot_rolling_beta(savefig='output/rolling_beta.png', benchmark=benchmark)
@@ -70,3 +72,7 @@ if submit:
     st.image('output/rolling_sharpe.png')
     returns.plot_rolling_sortino(savefig='output/rolling_sortino.png')
     st.image('output/rolling_sortino.png')
+    # Verificar na biblioteca o que é mais conveniente inserir
+    # há algumas possibilidades como os plots mode=full ou o relatório HTML gera dados escritos que não há no plot
+    # -- https://github.com/ranaroussi/quantstats
+    # -- returns.reports.plots(mode='full', benchmark='QQQ', repo)
