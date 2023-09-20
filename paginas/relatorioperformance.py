@@ -26,7 +26,7 @@ def relatorioperformance():
 
 
     qs.extend_pandas()
-    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">GoProfit</h3>',
+    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">Relatório de Performance</h3>',
                         unsafe_allow_html=True)
     form = st.form(key="annotation")
     form.write('Código da Ação')

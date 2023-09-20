@@ -10,7 +10,7 @@ import paginas.suporteresistencia as sr
 
 
 st.set_page_config(page_title="GoProfit",
-                   page_icon='🛩',
+                   page_icon='bar-chart',
                    layout="wide",
                    initial_sidebar_state="expanded",
                    menu_items={'Get help': None,
@@ -21,7 +21,7 @@ st.set_page_config(page_title="GoProfit",
 
 #navegation bar
 pagina = option_menu(
-        "GoProfit", ["Relatório Performance", "Prophet", 'Suporte & Resistência', 'Ifat'],
+        "GoProfit", ["Relatório Performance", "Prophet", 'Suporte & Resistência', 'IFat'],
         icons=['pin', 'pin-map', 'cast', 'table'],
     menu_icon="house",
     default_index=0,

@@ -28,7 +28,7 @@ def suporteresistencia():
 #     st.markdown(hide_menu_style, unsafe_allow_html=True)
 # #hidebar()
 
-    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">S&D</h3>',
+    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">Suporte & Resistência</h3>',
                         unsafe_allow_html=True)
 
     form = st.form(key="annotation")

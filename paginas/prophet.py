@@ -7,9 +7,16 @@ from streamlit_option_menu import option_menu
 from plotly import graph_objs as go
 import pandas as pd
 
+
+    
+
+
+
+
 #chamar pagina
 def prophet():
-    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">PROPHET</h3>',
+
+    st.markdown(f'<h3 style="text-align: center; color:#F63366; font-size:28px;">Prophet</h3>',
                         unsafe_allow_html=True)
     form = st.form(key="annotation")
     form.subheader('Escolha a Data e o Ativo')
@@ -158,8 +165,7 @@ def prophet():
                                     help="""
                                                 Esse ajuste define o quanto as variações sazonais podem ser flexíveis no modelo. Se você usar um valor grande, \n
                                                 o modelo vai se ajustar mais intensamente às grandes mudanças. Se usar um valor pequeno, o modelo \n
-                                                vai atenuar essas variações sazonais. O ajuste padrão é 10, que, na prática, não limita muito a \n
-                                                flexibilidade.  
+                                                vai atenuar essas variações sazonais. 
 
                                                 """)
     modelo = Prophet(#seasonality_mode=seasonality_mode,
