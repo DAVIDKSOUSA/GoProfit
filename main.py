@@ -38,5 +38,5 @@ if pagina == "Prophet":
 if pagina == 'Suporte & Resistência':
     sr.suporteresistencia()
 
-if pagina == 'Ifat':
+if pagina == 'IFat':
     ifat.ifat()

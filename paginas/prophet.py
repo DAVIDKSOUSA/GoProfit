@@ -7,12 +7,6 @@ from streamlit_option_menu import option_menu
 from plotly import graph_objs as go
 import pandas as pd
 
-
-    
-
-
-
-
 #chamar pagina
 def prophet():
 
@@ -195,7 +189,7 @@ def prophet():
         coluns[0].write('ds - **Data**')
         coluns[0].write('yhat - **Média**')
         coluns[1].write('yhat_upper - **Banda Superior**')
-        coluns[1].write('yhat_loewr - **Banda Inferior**')
+        coluns[1].write('yhat_lower - **Banda Inferior**')
         st.write(previsao[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(n_dias))
 
         # grafico2
