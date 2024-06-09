@@ -33,8 +33,8 @@ def suporteresistencia():
 
     form = st.form(key="annotation")
     form.write('Código da Ação')
-    ticker1 = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='VALE')
-    start_date = form.date_input('Data de Início', value=pd.to_datetime('2020-05-14'))
+    ticker1 = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='^BVSP')
+    start_date = form.date_input('Data de Início', value=pd.to_datetime('2022-05-14'))
     end_date = form.date_input('Data Final')
     #form.write('Benchmark')
     #benchmark = form.text_input('Insira o código de acordo com o site Yahoo Finance.', value='QQQ')
@@ -58,181 +58,181 @@ def suporteresistencia():
         vol_p1 = 20
         df1["Vol"] = np.round(df1["Returns"].rolling(vol_p1).std() * np.sqrt(252), 4)
 
-        # - Multiplying daily volatility by the square root of 252 gives annualized volatility;
-        # - If you divide the annualized volatility by the square root of:
-        #  - 12, it gives the monthly volatility
-        #  - 52, it gives the weekly volatility
+        # # - Multiplying daily volatility by the square root of 252 gives annualized volatility;
+        # # - If you divide the annualized volatility by the square root of:
+        # #  - 12, it gives the monthly volatility
+        # #  - 52, it gives the weekly volatility
 
-        # # Annual S&D Volatility Zones
+        # # # Annual S&D Volatility Zones
 
-        # In[4]:
+        # # In[4]:
 
-        # For the Annualized Volatility Chart
+        # # For the Annualized Volatility Chart
 
-        # Restante do código permanece igual
-
-
-        fig = make_subplots(rows=1, cols=1,
-                            shared_xaxes=True,
-                            vertical_spacing=0.08)
-
-        fig.add_trace(go.Scatter(x=df1.index, y=df1["Vol"] * 100
-                                 , name="Vol", line=dict(color="blue")))
-
-        fig.update_layout(height=800, width=1000
-                          , title_text="Annualized Volatility - " + ticker1 + " - www.outspokenmarket.com"
-                          , font_color="blue"
-                          , title_font_color="black"
-                          , xaxis_title="Years"
-                          , yaxis_title="Volatility (%)"
-                          , legend_title="Vol"
-                          , font=dict(size=15, color="Black")
-                          , xaxis_rangeslider_visible=True
-                          , dragmode='zoom'
-                          , hovermode='x'
-                          )
-
-        fig.update_xaxes(                
-
-                     rangeselector=dict(
-                         buttons=list([
-                             dict(count=1, label="1m", step="month", stepmode="backward"),
-                             dict(count=6, label="6m", step="month", stepmode="backward"),
-                             dict(count=1, label="YTD", step="year", stepmode="todate"),
-                             dict(count=1, label="1y", step="year", stepmode="backward"),
-                             dict(step="all")
-                                    ])         
-                                    ),
-                    tickmode="auto",
-                    rangemode='normal',
-                    rangeslider=dict(visible=True, thickness=0.10),
-                     )
-        fig.update_yaxes(rangemode='normal',
-                     type="log",
-                     tickmode="auto",
-                     autorange=True,  # Definido como False para permitir ajuste manual do intervalo
-                    )
+        # # Restante do código permanece igual
 
 
+        # fig = make_subplots(rows=1, cols=1,
+        #                     shared_xaxes=True,
+        #                     vertical_spacing=0.08)
 
-        st.plotly_chart(fig)
+        # fig.add_trace(go.Scatter(x=df1.index, y=df1["Vol"] * 100
+        #                          , name="Vol", line=dict(color="blue")))
 
-        # - A volatility of 15 represents a change, with a 68% probability, of a +-15% movement for the asset in 1 year
-        #  - This assumes that the returns are normally distributed, which we know is not the case...
-        #  - But it's a close enough approximation.
+        # fig.update_layout(height=800, width=1000
+        #                   , title_text="Annualized Volatility - " + ticker1 + " - www.outspokenmarket.com"
+        #                   , font_color="blue"
+        #                   , title_font_color="black"
+        #                   , xaxis_title="Years"
+        #                   , yaxis_title="Volatility (%)"
+        #                   , legend_title="Vol"
+        #                   , font=dict(size=15, color="Black")
+        #                   , xaxis_rangeslider_visible=True
+        #                   , dragmode='zoom'
+        #                   , hovermode='x'
+        #                   )
 
-        # In[5]:
+        # fig.update_xaxes(                
+
+        #              rangeselector=dict(
+        #                  buttons=list([
+        #                      dict(count=1, label="1m", step="month", stepmode="backward"),
+        #                      dict(count=6, label="6m", step="month", stepmode="backward"),
+        #                      dict(count=1, label="YTD", step="year", stepmode="todate"),
+        #                      dict(count=1, label="1y", step="year", stepmode="backward"),
+        #                      dict(step="all")
+        #                             ])         
+        #                             ),
+        #             tickmode="auto",
+        #             rangemode='normal',
+        #             rangeslider=dict(visible=True, thickness=0.10),
+        #              )
+        # fig.update_yaxes(rangemode='normal',
+        #              type="log",
+        #              tickmode="auto",
+        #              autorange=True,  # Definido como False para permitir ajuste manual do intervalo
+        #             )
 
 
 
+        # st.plotly_chart(fig)
+
+        # # - A volatility of 15 represents a change, with a 68% probability, of a +-15% movement for the asset in 1 year
+        # #  - This assumes that the returns are normally distributed, which we know is not the case...
+        # #  - But it's a close enough approximation.
+
+        # # In[5]:
 
 
-        df1["year"] = df1.index.year 
 
 
-        year = "2022"
+
+        # df1["year"] = df1.index.year 
 
 
-        df1 = df1[df1['year'] == int(year) +1]
+        # year = "2023"
 
 
-        Upper_Band_12m1d = df1["Vol"][-1] * df1["Adj Close"][-1] + df1["Adj Close"][-1]
-        Lower_Band_12m1d = df1["Adj Close"][-1] - df1["Vol"][-1] * df1["Adj Close"][-1]
-
-        Upper_Band_12m2d = 2 * df1["Vol"][-1] * df1["Adj Close"][-1] + df1["Adj Close"][-1]
-        Lower_Band_12m2d = df1["Adj Close"][-1] - 2 * df1["Vol"][-1] * df1["Adj Close"][-1]
-
-        # Upper_Band_12m3d = 3 * df1["Vol"][-1] * df1[["Adj Close"][-1] + df1["Adj Close"][-1]
-
-        # Lower_Band_12m4d = df1["Adj Close"][-1] - 4 * df1["Vol"][-1] * df1["Adj Close"][-1]
-
-        # Annual S&D Volatility Zones chart
-
-        fig = make_subplots(rows=1, cols=1,
-                            shared_xaxes=True,
-                            vertical_spacing=0.3)
-
-        # fig.add_trace(go.Candlestick(x=df1[str(int(year) + 1)].index
-        #                               , open=df1["Open"], high=df1["High"]
-        #                              , low=df1["Low"], close=df1["Close"]
-        #                             , increasing=dict(line=dict(color='black', width=1), fillcolor='green')
-        #                             ,  decreasing=dict(line=dict(color='black', width=1), fillcolor='red')
-        #                             ,  hoverlabel=dict(font=dict(color='white'))))
+        # df1 = df1[df1['year'] == int(year) +1]
 
 
-        fig.add_trace(go.Candlestick(x = df1.index
-                                 , open = df1["Open"], high = df1["High"]
-                                 , low = df1["Low"], close = df1["Close"]
-                                 , decreasing=dict(line=dict(color='black', width=1), fillcolor='red')
-                                 , increasing=dict(line=dict(color='black', width=1), fillcolor='green'))
-                 )
+        # Upper_Band_12m1d = df1["Vol"][-1] * df1["Adj Close"][-1] + df1["Adj Close"][-1]
+        # Lower_Band_12m1d = df1["Adj Close"][-1] - df1["Vol"][-1] * df1["Adj Close"][-1]
+
+        # Upper_Band_12m2d = 2 * df1["Vol"][-1] * df1["Adj Close"][-1] + df1["Adj Close"][-1]
+        # Lower_Band_12m2d = df1["Adj Close"][-1] - 2 * df1["Vol"][-1] * df1["Adj Close"][-1]
+
+        # # Upper_Band_12m3d = 3 * df1["Vol"][-1] * df1[["Adj Close"][-1] + df1["Adj Close"][-1]
+
+        # # Lower_Band_12m4d = df1["Adj Close"][-1] - 4 * df1["Vol"][-1] * df1["Adj Close"][-1]
+
+        # # Annual S&D Volatility Zones chart
+
+        # fig = make_subplots(rows=1, cols=1,
+        #                     shared_xaxes=True,
+        #                     vertical_spacing=0.3)
+
+        # # fig.add_trace(go.Candlestick(x=df1[str(int(year) + 1)].index
+        # #                               , open=df1["Open"], high=df1["High"]
+        # #                              , low=df1["Low"], close=df1["Close"]
+        # #                             , increasing=dict(line=dict(color='black', width=1), fillcolor='green')
+        # #                             ,  decreasing=dict(line=dict(color='black', width=1), fillcolor='red')
+        # #                             ,  hoverlabel=dict(font=dict(color='white'))))
+
+
+        # fig.add_trace(go.Candlestick(x = df1.index
+        #                          , open = df1["Open"], high = df1["High"]
+        #                          , low = df1["Low"], close = df1["Close"]
+        #                          , decreasing=dict(line=dict(color='black', width=1), fillcolor='red')
+        #                          , increasing=dict(line=dict(color='black', width=1), fillcolor='green'))
+        #          )
 
     
 
-        fig.add_hline(y=Upper_Band_12m1d, line_width=1, line_dash="dash", line_color="green")
-        fig.add_hline(y=Lower_Band_12m1d, line_width=1, line_dash="dash", line_color="red")
+        # fig.add_hline(y=Upper_Band_12m1d, line_width=1, line_dash="dash", line_color="green")
+        # fig.add_hline(y=Lower_Band_12m1d, line_width=1, line_dash="dash", line_color="red")
 
-        fig.add_hline(y=Upper_Band_12m2d, line_width=1, line_dash="dash", line_color="green")
-        fig.add_hline(y=Lower_Band_12m2d, line_width=1, line_dash="dash", line_color="red")
+        # fig.add_hline(y=Upper_Band_12m2d, line_width=1, line_dash="dash", line_color="green")
+        # fig.add_hline(y=Lower_Band_12m2d, line_width=1, line_dash="dash", line_color="red")
 
-        # fig.add_hline(y=Upper_Band_12m3d, line_width=2, line_dash="dash", line_color="green")
-        # fig.add_hline(y=Lower_Band_12m4d, line_width=2, line_dash="dash", line_color="red")
+        # # fig.add_hline(y=Upper_Band_12m3d, line_width=2, line_dash="dash", line_color="green")
+        # # fig.add_hline(y=Lower_Band_12m4d, line_width=2, line_dash="dash", line_color="red")
 
-        fig.update_layout(height=800, width=1000
-                          , title_text="Annual S&D Volatility Zones: " + str(int(year) + 1) + " " + ticker1
-                          , font_color="blue"
-                          , title_font_color="black"
-                          , xaxis_title="Years"
-                          , yaxis_title="Close"
-                          , legend_title="Vol"
-                          , font=dict(size=15, color="Black")
-                          , xaxis_rangeslider_visible=True
-                          )
+        # fig.update_layout(height=800, width=1000
+        #                   , title_text="Annual S&D Volatility Zones: " + str(int(year) + 1) + " " + ticker1
+        #                   , font_color="blue"
+        #                   , title_font_color="black"
+        #                   , xaxis_title="Years"
+        #                   , yaxis_title="Close"
+        #                   , legend_title="Vol"
+        #                   , font=dict(size=15, color="Black")
+        #                   , xaxis_rangeslider_visible=True
+        #                   )
 
 
-        fig.update_layout(xaxis=dict(fixedrange=False), yaxis=dict(fixedrange=False),
-                    xaxis_title="Data", 
-                    yaxis_title="Valor", 
-                    width=1000, height=800,
-                    dragmode='zoom',
-                    hovermode='x')
+        # fig.update_layout(xaxis=dict(fixedrange=False), yaxis=dict(fixedrange=False),
+        #             xaxis_title="Data", 
+        #             yaxis_title="Valor", 
+        #             width=1000, height=800,
+        #             dragmode='zoom',
+        #             hovermode='x')
 
-        fig.update_xaxes(                
+        # fig.update_xaxes(                
 
-                     rangeselector=dict(
-                         buttons=list([
-                             dict(count=1, label="1m", step="month", stepmode="backward"),
-                             dict(count=6, label="6m", step="month", stepmode="backward"),
-                             dict(count=1, label="YTD", step="year", stepmode="todate"),
-                             dict(count=1, label="1y", step="year", stepmode="backward"),
-                             dict(step="all")
-                                    ])         
-                                    ),
-                    tickmode="auto",
-                    rangemode='normal',
-                    rangeslider=dict(visible=True, thickness=0.10),
-                     )
+        #              rangeselector=dict(
+        #                  buttons=list([
+        #                      dict(count=1, label="1m", step="month", stepmode="backward"),
+        #                      dict(count=6, label="6m", step="month", stepmode="backward"),
+        #                      dict(count=1, label="YTD", step="year", stepmode="todate"),
+        #                      dict(count=1, label="1y", step="year", stepmode="backward"),
+        #                      dict(step="all")
+        #                             ])         
+        #                             ),
+        #             tickmode="auto",
+        #             rangemode='normal',
+        #             rangeslider=dict(visible=True, thickness=0.10),
+        #              )
 
-        fig.update_yaxes(rangemode='normal',
-                     type="log",
-                     tickmode="auto",
-                     autorange=True,  # Definido como False para permitir ajuste manual do intervalo
-                    )
+        # fig.update_yaxes(rangemode='normal',
+        #              type="log",
+        #              tickmode="auto",
+        #              autorange=True,  # Definido como False para permitir ajuste manual do intervalo
+        #             )
 
-        # Code to exclude empty dates from the chart
-        dt_all = pd.date_range(start=df1.index[0]
-                               , end=df1.index[-1]
-                               , freq="D")
-        dt_all_py = [d.to_pydatetime() for d in dt_all]
-        dt_obs_py = [d.to_pydatetime() for d in df1.index]
+        # # Code to exclude empty dates from the chart
+        # dt_all = pd.date_range(start=df1.index[0]
+        #                        , end=df1.index[-1]
+        #                        , freq="D")
+        # dt_all_py = [d.to_pydatetime() for d in dt_all]
+        # dt_obs_py = [d.to_pydatetime() for d in df1.index]
 
-        dt_breaks = [d for d in dt_all_py if d not in dt_obs_py]
+        # dt_breaks = [d for d in dt_all_py if d not in dt_obs_py]
 
-        fig.update_xaxes(
-            rangebreaks=[dict(values=dt_breaks)]
-        )
+        # fig.update_xaxes(
+        #     rangebreaks=[dict(values=dt_breaks)]
+        # )
 
-        st.plotly_chart(fig)
+        # st.plotly_chart(fig)
 
         # # Weekly S&D Volatility Zones
 

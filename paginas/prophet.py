@@ -14,90 +14,89 @@ def prophet():
                         unsafe_allow_html=True)
     form = st.form(key="annotation")
     form.subheader('Escolha a Data e o Ativo')
-    ticker = form.text_input('TICKER - Yahoo Finance', value='VALE', 
-                             help="""
+    ticker = form.text_input('TICKER - Yahoo Finance', value='^BVSP', help=
+                                        """
                                         Para realizar a análise de um ativo deve-se inserir no campo abaixo mesmo código do site Yahoo Finance.
                                         Caso haja dúvidas em relação ao código a ser utilizado [clique aqui](https://finance.yahoo.com/quote/%5EBVSP/components/) 
                                         e digite o nome do ativo financeiro na barra de busca do site [Yahoo Finance](https://finance.yahoo.com/quote/%5EBVSP/components/). Exemplo:\n
                                         - PETR3 digite **PETR3.SA**\n
                                         - S&P500 digite **SPX**\n
                                         - Crude Oil Jun22 digite **CL=F**\n
-                                        - Bitcoin digite **BTC-USD**\n
-                                        """)
+                                        - Bitcoin digite **BTC-USD**\n"""
+                                        )
+##DIZERES PARA OS USUÁRIOS
+    # expander = form.expander('Códigos')
+    # expander.write("""
 
-    expander = form.expander('Códigos')
-    expander.write("""
-
-                    **Futures**\n
-            ES=F	E-Mini S&P 500 Jun 22\n
-            YM=F	Mini Dow Jones Indus.-$5 Jun 22\n
-            NQ=F   	Nasdaq 100 Jun 22\n
-            RTY=F	E-mini Russell 2000 Index Futur\n
-            ZB=F	U.S. Treasury Bond Futures,Jun-\n
-            ZN=F	10-Year T-Note Futures,Jun-2022\n
-            ZF=F	Five-Year US Treasury Note Futu\n
-            ZT=F	2-Year T-Note Futures,Jun-2022\n
-            GC=F	Gold\n
-            MGC=F	Micro Gold Futures,Aug-2022\n
-            SI=F	Silver\n
-            SIL=F	Micro Silver Futures,Jul-2022\n
-            PL=F	Platinum Jul 22\n
-            HG=F	Copper Jul 22\n
-            PA=F	Palladium Jun 22\n
-            CL=F	Crude Oil\n
-            HO=F	Heating Oil Jun 22\n
-            NG=F	Natural Gas Jun 22\n
-            RB=F	RBOB Gasoline Jun 22\n
-            BZ=F	Brent Crude Oil Last Day Financ\n
-            B0=F	Mont Belvieu LDH Propane (OPIS)\n
-            ZC=F	Corn Futures,Jul-2022\n
-            ZO=F	Oat Futures,Jul-2022\n
-            KE=F	KC HRW Wheat Futures,Jul-2022\n
-            ZR=F	Rough Rice Futures,Jul-2022\n
-            ZM=F	Soybean Meal Futures,Jul-2022\n
-            ZL=F	Soybean Oil Futures,Jul-2022\n
-            ZS=F	Soybean Futures,Jul-2022\n
-            GF=F	Feeder Cattle Futures,Aug-2022\n
-            HE=F	Lean Hogs Futures,Jun-2022\n
-            LE=F	Live Cattle Futures,Jun-2022\n
-            CC=F	Cocoa Jul 22\n
-            KC=F	Coffee Jul 22\n
-            CT=F	Cotton Jul 22\n
-            LBS=F	Lumber Jul 22\n
-            OJ=F	Orange Juice Jul 22\n
-            SB=F	Sugar #11 Jul 22\n
-             **World Indices**\n
-            ^BVSP	IBOVESPA\n
-            ^GSPC	S&P 500\n
-            ^DJI	Dow 30\n
-            ^IXIC	Nasdaq\n
-            ^NYA	NYSE COMPOSITE (DJ)\n
-            ^XAX	NYSE AMEX COMPOSITE INDEX\n
-            ^RUT	Russell 2000\n
-            ^VIX	CBOE Volatility Index\n
-            ^FTSE	FTSE 100\n
-            ^GDAXI	DAX PERFORMANCE-INDEX\n
-            ^FCHI	CAC 40\n
-            ^STOXX50E	ESTX 50 PR.EUR\n
-            ^N100	Euronext 100 Index\n
-            ^BFX	BEL 20\n
-            ^N225	Nikkei 225\n
-            ^HSI	HANG SENG INDEX\n
-            ^STI	STI Index\n
-            ^AXJO	S&P/ASX 200\n
-            ^AORD	ALL ORDINARIES\n
-            ^BSESN	S&P BSE SENSEX\n
-            ^JKSE	Jakarta Composite Index\n
-            ^KLSE	FTSE Bursa Malaysia KLCI\n
-            ^NZ50	S&P/NZX 50 INDEX GROSS\n
-            ^KS11	KOSPI Composite Index\n
-            ^TWII	TSEC weighted index\n
-            ^GSPTSE	S&P/TSX Composite index\n
-            ^MXX	IPC MEXICO\n
-            ^IPSA	S&P/CLX IPSA\n
-            ^MERV	MERVAL\n
-
-        """)
+    #                 **Futures**\n
+    #         ES=F	E-Mini S&P 500 Jun 22\n
+    #         YM=F	Mini Dow Jones Indus.-$5 Jun 22\n
+    #         NQ=F   	Nasdaq 100 Jun 22\n
+    #         RTY=F	E-mini Russell 2000 Index Futur\n
+    #         ZB=F	U.S. Treasury Bond Futures,Jun-\n
+    #         ZN=F	10-Year T-Note Futures,Jun-2022\n
+    #         ZF=F	Five-Year US Treasury Note Futu\n
+    #         ZT=F	2-Year T-Note Futures,Jun-2022\n
+    #         GC=F	Gold\n
+    #         MGC=F	Micro Gold Futures,Aug-2022\n
+    #         SI=F	Silver\n
+    #         SIL=F	Micro Silver Futures,Jul-2022\n
+    #         PL=F	Platinum Jul 22\n
+    #         HG=F	Copper Jul 22\n
+    #         PA=F	Palladium Jun 22\n
+    #         CL=F	Crude Oil\n
+    #         HO=F	Heating Oil Jun 22\n
+    #         NG=F	Natural Gas Jun 22\n
+    #         RB=F	RBOB Gasoline Jun 22\n
+    #         BZ=F	Brent Crude Oil Last Day Financ\n
+    #         B0=F	Mont Belvieu LDH Propane (OPIS)\n
+    #         ZC=F	Corn Futures,Jul-2022\n
+    #         ZO=F	Oat Futures,Jul-2022\n
+    #         KE=F	KC HRW Wheat Futures,Jul-2022\n
+    #         ZR=F	Rough Rice Futures,Jul-2022\n
+    #         ZM=F	Soybean Meal Futures,Jul-2022\n
+    #         ZL=F	Soybean Oil Futures,Jul-2022\n
+    #         ZS=F	Soybean Futures,Jul-2022\n
+    #         GF=F	Feeder Cattle Futures,Aug-2022\n
+    #         HE=F	Lean Hogs Futures,Jun-2022\n
+    #         LE=F	Live Cattle Futures,Jun-2022\n
+    #         CC=F	Cocoa Jul 22\n
+    #         KC=F	Coffee Jul 22\n
+    #         CT=F	Cotton Jul 22\n
+    #         LBS=F	Lumber Jul 22\n
+    #         OJ=F	Orange Juice Jul 22\n
+    #         SB=F	Sugar #11 Jul 22\n
+    #          **World Indices**\n
+    #         ^BVSP	IBOVESPA\n
+    #         ^GSPC	S&P 500\n
+    #         ^DJI	Dow 30\n
+    #         ^IXIC	Nasdaq\n
+    #         ^NYA	NYSE COMPOSITE (DJ)\n
+    #         ^XAX	NYSE AMEX COMPOSITE INDEX\n
+    #         ^RUT	Russell 2000\n
+    #         ^VIX	CBOE Volatility Index\n
+    #         ^FTSE	FTSE 100\n
+    #         ^GDAXI	DAX PERFORMANCE-INDEX\n
+    #         ^FCHI	CAC 40\n
+    #         ^STOXX50E	ESTX 50 PR.EUR\n
+    #         ^N100	Euronext 100 Index\n
+    #         ^BFX	BEL 20\n
+    #         ^N225	Nikkei 225\n
+    #         ^HSI	HANG SENG INDEX\n
+    #         ^STI	STI Index\n
+    #         ^AXJO	S&P/ASX 200\n
+    #         ^AORD	ALL ORDINARIES\n
+    #         ^BSESN	S&P BSE SENSEX\n
+    #         ^JKSE	Jakarta Composite Index\n
+    #         ^KLSE	FTSE Bursa Malaysia KLCI\n
+    #         ^NZ50	S&P/NZX 50 INDEX GROSS\n
+    #         ^KS11	KOSPI Composite Index\n
+    #         ^TWII	TSEC weighted index\n
+    #         ^GSPTSE	S&P/TSX Composite index\n
+    #         ^MXX	IPC MEXICO\n
+    #         ^IPSA	S&P/CLX IPSA\n
+    #         ^MERV	MERVAL\n
+    #     """)
     start_date = form.date_input('Data de Início', value=pd.to_datetime('2020-05-14'))
     end_date = form.date_input('Data Final')
 
