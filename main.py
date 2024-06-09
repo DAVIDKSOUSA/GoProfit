@@ -31,12 +31,9 @@ pagina = option_menu(
 
 if pagina == "Relatório Performance":
     rp.relatorioperformance()
-    
 if pagina == "Prophet":
     ph.prophet()
-
 if pagina == 'Suporte & Resistência':
     sr.suporteresistencia()
-
 if pagina == 'IFat':
     ifat.ifat()
