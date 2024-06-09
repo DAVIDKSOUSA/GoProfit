@@ -37,3 +37,7 @@ if pagina == 'Suporte & Resistência':
     sr.suporteresistencia()
 if pagina == 'IFat':
     ifat.ifat()
+
+#teste de integração
+#teste 2
+#test3
