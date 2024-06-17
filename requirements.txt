@@ -5,3 +5,4 @@ plotly==5.16.1
 prophet==1.1.4
 quantstats==0.0.62
 streamlit-option-menu==0.3.6
+numpy==1.21.0
